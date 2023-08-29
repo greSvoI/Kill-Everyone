@@ -60,7 +60,7 @@ namespace KillEveryone
 		public abstract void UpdateState();
 		public abstract void FixedUpdateState();
 
-		public virtual void OnStopState() { }
+		public abstract void OnStopState();
 
     }
 }

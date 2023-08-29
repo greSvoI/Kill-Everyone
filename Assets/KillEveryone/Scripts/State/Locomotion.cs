@@ -20,6 +20,11 @@ namespace KillEveryone
 			animatorController.SetAnimationState(_animatorStateName, 0,_duration);
 		}
 
+		public override void OnStopState()
+		{
+			
+		}
+
 		public override bool ReadyToStart()
 		{
 			return detectionController.IsGrounded();
@@ -27,19 +32,9 @@ namespace KillEveryone
 
 		public override void UpdateState()
 		{
-
-			if(input.Move != Vector2.zero)
-			{
-				float speed = input.Sprint ? _sprintSpeed : _moveSpeed;
-				Vector2 direction = new Vector2(input.Move.x, input.Move.y).normalized;
-				moveController.Move(speed,direction);
-				float magnituda = input.Sprint ? 1f : 0.5f;
-				animatorController.MovementUpdate(magnituda);
-			}
-			else
-			{
-				animatorController.MovementUpdate(0f);
-			}
+			float speed = input.Sprint ? _sprintSpeed : _moveSpeed;
+			speed = input.Move == Vector2.zero ? 0f : speed;
+			moveController.Move(input.Move, speed);
 		}
 	}
 }

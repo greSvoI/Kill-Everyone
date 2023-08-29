@@ -26,18 +26,12 @@ namespace KillEveryone
 
 		public override void UpdateState()
 		{
-			if (input.Move != Vector2.zero)
-			{
-				
-				Vector2 direction = new Vector2(input.Move.x, input.Move.y).normalized;
-				moveController.Move(_speed, direction);
-				animatorController.MovementUpdate(1f);
-			}
-			else
-			{
-				animatorController.MovementUpdate(0f);
-			}
-
+	
+			Vector2 direction = new Vector2(input.Move.x, input.Move.y).normalized;
+			Debug.Log(input.Move);
+			Debug.Log(direction);
+			moveController.Move(direction,_speed);
+			
 			if (!input.Crouch)
 			{
 				
@@ -46,7 +40,7 @@ namespace KillEveryone
 		}
 		public override void OnStopState()
 		{
-			base.OnStopState();
+			
 			
 		}
 	}

@@ -16,6 +16,11 @@ namespace KillEveryone
 			
 		}
 
+		public override void OnStopState()
+		{
+			throw new System.NotImplementedException();
+		}
+
 		public override bool ReadyToStart()
 		{
 			return input.Roll && detectionController.IsGrounded();

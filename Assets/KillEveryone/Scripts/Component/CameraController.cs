@@ -19,7 +19,6 @@ namespace KillEveryone
 
 		[SerializeField] private Transform _followCamera;
 
-		[SerializeField] private float _speedChangeRate = 5f;
 		[SerializeField] private float _sensivity = 5f;
 
 		private float _cameraInputX;
