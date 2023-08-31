@@ -34,6 +34,12 @@ namespace KillEveryone
 			HashAnimationName();
 
 			EventManager.Aim += OnAim;
+			EventManager.Fire += OnFire;
+		}
+
+		private void OnFire(bool obj)
+		{
+			
 		}
 
 		private void OnAim(bool obj)
@@ -56,7 +62,8 @@ namespace KillEveryone
 		}
 		public void UpdateAnimatorParametrs()
 		{
-			if(input.Move == Vector2.zero)
+			float magnituda = 0f;
+			if (input.Move == Vector2.zero)
 			{
 				animator.SetFloat(_hashHorizontal, 0f, 0.2f, Time.deltaTime);
 				animator.SetFloat(_hashVertical, 0f, 0.2f, Time.deltaTime);
@@ -65,17 +72,17 @@ namespace KillEveryone
 			{
 				animator.SetFloat(_hashHorizontal,input.Move.x, 0.2f, Time.deltaTime);
 				animator.SetFloat(_hashVertical, input.Move.y, 0.2f, Time.deltaTime);
+				magnituda = input.Sprint ? input.Magnituda / 2f : input.Magnituda;
 			}
+			
+			_animationBlend = Mathf.Lerp(_animationBlend, magnituda, Time.deltaTime * SpeedChangeRate);
 
-			float magnituda = input.Sprint ? input.Magnituda + 0.5f : input.Magnituda;
 
-		    _animationBlend = Mathf.Lerp(_animationBlend,magnituda, Time.deltaTime * SpeedChangeRate);
-
-			if (_animationBlend < 0.1f)
-				animator.SetFloat(_hashMagnituda, 0f);
+			if (_animationBlend < 0.2f)
+				animator.SetFloat(_hashMagnituda, 0f, 0.2f, Time.deltaTime);
 			else
 			{
-				animator.SetFloat(_hashMagnituda, _animationBlend);
+				animator.SetFloat(_hashMagnituda, _animationBlend, 0.2f, Time.deltaTime);
 			}
 
 		}
@@ -120,6 +127,7 @@ namespace KillEveryone
 		private void OnDestroy()
 		{
 			EventManager.Aim -= OnAim;
+			EventManager.Fire -= OnFire;
 		}
 	}
 }

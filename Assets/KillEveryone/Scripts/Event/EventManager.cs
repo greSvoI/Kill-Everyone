@@ -8,5 +8,6 @@ namespace KillEveryone
 	public  class EventManager : MonoBehaviour
 	{
 		public static Action<bool> Aim {  get; set; }
+		public static Action<bool> Fire {  get; set; }
 	}
 }

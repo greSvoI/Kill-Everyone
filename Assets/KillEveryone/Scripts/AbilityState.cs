@@ -21,7 +21,9 @@ namespace KillEveryone
 			foreach (AbstractAbilityState state in playerAbilities) { }
 
 		}
-
+		private void Start()
+		{
+		}
 
 		private void Update()
 		{
@@ -62,11 +64,19 @@ namespace KillEveryone
 
 				//Next state start
 				nextState.StartState();
+				nextState.abilityStarted += StateHasStarted;
 
 				CurrentState = nextState;
 				CurrentState.abilityStopped += StateHasStopped;
 				OnStateStart?.Invoke(CurrentState);
 			}
+		}
+
+		private void StateHasStarted(AbstractAbilityState state)
+		{
+			state.abilityStarted -= StateHasStarted;
+			
+
 		}
 
 		private void StateHasStopped(AbstractAbilityState state)

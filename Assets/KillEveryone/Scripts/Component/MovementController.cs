@@ -56,7 +56,8 @@ namespace KillEveryone
 			
 			float targetRotation = 0f;
 		    _speed = Mathf.Lerp(_speed, targetSpeed * input.Move.magnitude, Time.deltaTime * SpeedChangeRate);
-			if (_speed < 0.1f) _speed = 0f;
+
+			if (_speed < 0.2f) _speed = 0f;
 
 			if (moveInput != Vector2.zero)
 			{
@@ -71,6 +72,10 @@ namespace KillEveryone
 			Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 			velocity = targetDirection.normalized * _speed + new Vector3(0.0f, velocity.y, 0.0f);
 
+		}
+		private void OnAnimatorMove()
+		{
+			
 		}
 	}
 }

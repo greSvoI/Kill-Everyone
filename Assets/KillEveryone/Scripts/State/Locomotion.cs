@@ -32,8 +32,8 @@ namespace KillEveryone
 
 		public override void UpdateState()
 		{
-			float speed = input.Sprint ? _sprintSpeed : _moveSpeed;
-			speed = input.Move == Vector2.zero ? 0f : speed;
+			float speed = input.Sprint ? _moveSpeed : _sprintSpeed;
+			//speed = input.Move == Vector2.zero ? 0f : speed;
 			moveController.Move(input.Move, speed);
 		}
 	}

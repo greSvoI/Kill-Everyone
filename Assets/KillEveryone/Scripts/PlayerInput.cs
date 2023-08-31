@@ -13,13 +13,16 @@ namespace KillEveryone
 		[SerializeField] private bool _sprint;
 		[SerializeField] private bool _rool;
 		[SerializeField] private bool _crouch;
+
 		[SerializeField] private bool _aim = false;
+		[SerializeField] private bool _fire = false;
 		public Vector2 Move => _move;
 		public Vector2 Look => _look;
 		public bool Sprint => _sprint;
 		public bool Roll => _rool;
 		public bool Crouch => _crouch;
 		public bool Aim => _aim;
+		public bool Fire => _fire;
 		public float Magnituda => _magnituda;
 
 		private void Awake()
@@ -42,6 +45,15 @@ namespace KillEveryone
 			input.Player.Crouch.canceled += i => _crouch = i.ReadValueAsButton();
 
 			input.Player.Aim.performed += i => { _aim = !_aim; EventManager.Aim?.Invoke(_aim); };
+
+			input.Player.Fire.performed += i => { 
+				_fire = i.ReadValueAsButton(); 
+				_aim = _fire;
+				EventManager.Aim?. Invoke(_aim);
+				EventManager.Fire?.Invoke(_fire);
+			};
+			input.Player.Fire.canceled += i => { _fire = i.ReadValueAsButton(); EventManager.Fire?.Invoke(_fire); };
+
 		}
 		private void Update()
 		{

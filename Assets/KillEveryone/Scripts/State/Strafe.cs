@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 namespace KillEveryone
 {
@@ -13,12 +14,12 @@ namespace KillEveryone
 
 		public override void FixedUpdateState()
 		{
-			
 		}
+
 
 		public override void OnStartState()
 		{
-			animatorController.SetAnimationState(_animatorStateName, 0, _duration);
+			animatorController.SetAnimationState(_animatorStateName, 0, _duration);		
 		}
 
 		public override void OnStopState()
@@ -36,8 +37,9 @@ namespace KillEveryone
 
 			moveController.Move( input.Move, _speed, false);
 
-			Quaternion rot = Quaternion.LookRotation(Camera.main.transform.forward);
-			transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * _speedRotate);
+			//Quaternion rot = Quaternion.identity;
+			//rot.y = Quaternion.LookRotation(Camera.main.transform.forward).y;
+			
 			transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
 
 			if (!input.Aim)
