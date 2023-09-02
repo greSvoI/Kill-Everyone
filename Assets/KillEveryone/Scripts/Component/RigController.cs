@@ -10,18 +10,20 @@ namespace KillEveryone
 	{
 		[SerializeField] public Rig aimRigLayer;
 		[SerializeField] public Rig handRigLayer;
+		[SerializeField] private WeaponController weaponController;
 		[SerializeField] private float _aimDuraton = 0.2f;
 
 		
 		public bool _aimining = false;
  		private void Start()
 		{
+			weaponController = GetComponent<WeaponController>();
 			EventManager.Aim += OnAim;
 		}
 
 		private void Update()
 		{
-			if(_aimining)
+			if(_aimining && weaponController._isEquip)
 			{
 				aimRigLayer.weight += Time.deltaTime / _aimDuraton;
 				handRigLayer.weight += Time.deltaTime / _aimDuraton;

@@ -12,16 +12,18 @@ namespace KillEveryone
 
 		}
 
+		[SerializeField] private Weapon weapon;
 
 		public bool _isFiring = false;
+		public bool _isEquip = false;
 
-		public RigController rig;
+		public RigController rigLayers;
+
 		public Transform rayCastOrigin;
 		public Transform rayCastDestination;
+		[SerializeField] private Transform weaponHolder;
+
 		public TrailRenderer traceEffect;
-
-		public ParticleSystem[] fireEffect;
-
 
 		public ParticleSystem metallEffect;
 		public ParticleSystem stoneEffect;
@@ -37,18 +39,37 @@ namespace KillEveryone
 
 		private void Start()
 		{
-			rig = GetComponent<RigController>();
+			rigLayers = GetComponent<RigController>();
 			EventManager.Fire += OnFire;
+			Weapon exist = GetComponentInChildren<Weapon>();
+			if(exist)
+			{
+				Equip(exist);
+			}
+		}
+
+		public void Equip(Weapon wnewWeapon)
+		{
+			weapon = wnewWeapon;
+			weapon.transform.parent = weaponHolder;
+			weapon.transform.localPosition = Vector3.zero;
+			weapon.transform.localRotation = Quaternion.identity;
+			rayCastOrigin = weapon.muzzle;
+			_isEquip = true;
 		}
 
 		private void Update()
 		{
-			if (_isFiring && rig.aimRigLayer.weight > 0.9f) { 
-
-				if(Time.time > _lastShot + _fireRate)
+			if(weapon && _isEquip)
+			{
+				if (_isFiring && rigLayers.aimRigLayer.weight > 0.9f)
 				{
-					Shoot();
-					_lastShot = Time.time;
+
+					if (Time.time > _lastShot + _fireRate)
+					{
+						Shoot();
+						_lastShot = Time.time;
+					}
 				}
 			}
 		}
@@ -59,16 +80,14 @@ namespace KillEveryone
 		private void OnDrawGizmos()
 		{
 			Gizmos.color = Color.yellow;
+			if(rayCastOrigin != null)
 			Gizmos.DrawLine(rayCastOrigin.transform.position, rayCastDestination.transform.position);
 		}
 		public void Shoot()
 		{
 			
 			_isFiring = true;
-			foreach (var p in fireEffect)
-			{
-				p.Emit(1);
-			}
+			weapon.Fire();
 			ray.origin = rayCastOrigin.position;
 			ray.direction = rayCastDestination.position - rayCastOrigin.position;
 

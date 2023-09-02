@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 427052}
   - component: {fileID: 3338540}
   - component: {fileID: 2397092}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: renderer
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102912}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 473618}
   - component: {fileID: 3375860}
   - component: {fileID: 2343728}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: cameraMask
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 401306}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: ScopeTarget
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 499880}
   - component: {fileID: 3382638}
   - component: {fileID: 2303978}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: cameraSprite
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -306,13 +306,13 @@ GameObject:
   - component: {fileID: 2036098}
   - component: {fileID: 12402664}
   - component: {fileID: 6154761018069151175}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Camera
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &434806
 Transform:
   m_ObjectHideFlags: 0
@@ -421,7 +421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 429992}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Particles
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 429994}
   - component: {fileID: 198893295435253854}
   - component: {fileID: 199505307868183638}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Capsule_rif
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -3345,7 +3345,7 @@ GameObject:
   - component: {fileID: 429996}
   - component: {fileID: 198571845512792472}
   - component: {fileID: 199979952119064346}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Fire_1
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -3383,7 +3383,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -8228,7 +8228,7 @@ GameObject:
   - component: {fileID: 429998}
   - component: {fileID: 198039580061606108}
   - component: {fileID: 199531503725747300}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Fire_2
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -13111,7 +13111,7 @@ GameObject:
   - component: {fileID: 430000}
   - component: {fileID: 198183902401824878}
   - component: {fileID: 199319932390613364}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Fire_5
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -17993,7 +17993,7 @@ GameObject:
   - component: {fileID: 430002}
   - component: {fileID: 198318959975429786}
   - component: {fileID: 199554681541650804}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Fire_3
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -22875,7 +22875,7 @@ GameObject:
   - component: {fileID: 430004}
   - component: {fileID: 198680332433133032}
   - component: {fileID: 199742077189745252}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Fire_4
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -27757,7 +27757,7 @@ GameObject:
   - component: {fileID: 430010}
   - component: {fileID: 198915541407715380}
   - component: {fileID: 199190372126576210}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Smoke_1
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -32639,7 +32639,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430014}
   - component: {fileID: 8229992}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: AudioSource
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -32766,7 +32766,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 430016}
-  m_Layer: 2
+  - component: {fileID: 9174377439854228691}
+  m_Layer: 3
   m_Name: AssaultRifle
   m_TagString: Weapon
   m_Icon: {fileID: 2270504221434485236, guid: 0000000000000000d000000000000000, type: 0}
@@ -32780,15 +32781,36 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130016}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.542005, y: 0.662, z: -21.349585}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.0115488, y: -0.11016716, z: -0.2576462, w: 0.9598689}
+  m_LocalPosition: {x: -0.106, y: -0.176, z: 0.24}
+  m_LocalScale: {x: 0.99999994, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 427052}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.983, y: -12.567, z: -29.832}
+--- !u!114 &9174377439854228691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7edd451c6588e4bbf82e0bd468604f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireEffect:
+  - {fileID: 198039580061606108}
+  - {fileID: 198183902401824878}
+  - {fileID: 198318959975429786}
+  - {fileID: 198680332433133032}
+  - {fileID: 198915541407715380}
+  - {fileID: 198893295435253854}
+  - {fileID: 198571845512792472}
+  muzzle: {fileID: 4000012731015802}
 --- !u!1 &130018
 GameObject:
   m_ObjectHideFlags: 0
@@ -32800,7 +32822,7 @@ GameObject:
   - component: {fileID: 430018}
   - component: {fileID: 10829992}
   - component: {fileID: 6600069541829498940}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Point light
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -32913,7 +32935,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 461228}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: AimReference
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -32944,7 +32966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 492864}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: leftHandIK
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -32976,7 +32998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000012908772914}
   - component: {fileID: 65000013253093084}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: hitbox
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -33020,7 +33042,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000012731015802}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: muzzle
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -33053,7 +33075,7 @@ GameObject:
   - component: {fileID: 4780710587202538}
   - component: {fileID: 33732198183393950}
   - component: {fileID: 23145971099231778}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: OriginalClip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33137,7 +33159,7 @@ GameObject:
   - component: {fileID: 4756465362963946}
   - component: {fileID: 33797911558100942}
   - component: {fileID: 23912502829911086}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: AssaultRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33221,7 +33243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4134134383550478}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RemovableClip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33253,7 +33275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8869274687711857599}
   - component: {fileID: 8873774473244436913}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: AimAudioSource
   m_TagString: Weapon
   m_Icon: {fileID: 0}

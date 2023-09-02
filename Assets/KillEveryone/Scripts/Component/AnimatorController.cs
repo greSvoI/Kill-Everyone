@@ -10,6 +10,7 @@ namespace KillEveryone
 	{
 		private Animator animator;
 		private PlayerInput input;
+		private WeaponController weaponController;
 
 		[Tooltip("Acceleration and deceleration")]
 		[SerializeField] private float SpeedChangeRate = 10.0f;
@@ -20,6 +21,9 @@ namespace KillEveryone
 		[SerializeField] private string vertical;
 		[SerializeField] private string magnituda;
 
+		[Header("Layers name")]
+		[SerializeField] private string onlyArms;
+
 		private float _animationBlend = 0f;
 
 		private int _hashHorizontal;
@@ -27,10 +31,13 @@ namespace KillEveryone
 		private int _hashMagnituda;
 		private int _hashIsAiming;
 
+		private int _layerOnlyArms;
+
 		private void Start()
 		{
 			animator = GetComponent<Animator>();
 			input = GetComponent<PlayerInput>();
+			weaponController = GetComponent<WeaponController>();
 			HashAnimationName();
 
 			EventManager.Aim += OnAim;
@@ -44,7 +51,12 @@ namespace KillEveryone
 
 		private void OnAim(bool obj)
 		{
-			animator.SetBool(_hashIsAiming, obj);
+			if (weaponController._isEquip)
+			{
+				animator.SetBool(_hashIsAiming, obj);
+				animator.SetLayerWeight(_layerOnlyArms, 1);
+			}
+			else animator.SetLayerWeight(_layerOnlyArms, 0);
 		}
 
 		private void HashAnimationName()
@@ -53,6 +65,8 @@ namespace KillEveryone
 			_hashVertical = Animator.StringToHash(vertical);
 			_hashMagnituda = Animator.StringToHash(magnituda);
 			_hashIsAiming = Animator.StringToHash(isAiming);
+
+			_layerOnlyArms = animator.GetLayerIndex(onlyArms);
 		}
 
 		private void Update()
@@ -63,26 +77,39 @@ namespace KillEveryone
 		public void UpdateAnimatorParametrs()
 		{
 			float magnituda = 0f;
-			if (input.Move == Vector2.zero)
-			{
-				animator.SetFloat(_hashHorizontal, 0f, 0.2f, Time.deltaTime);
-				animator.SetFloat(_hashVertical, 0f, 0.2f, Time.deltaTime);
-			}
-			else
-			{
-				animator.SetFloat(_hashHorizontal,input.Move.x, 0.2f, Time.deltaTime);
-				animator.SetFloat(_hashVertical, input.Move.y, 0.2f, Time.deltaTime);
-				magnituda = input.Sprint ? input.Magnituda / 2f : input.Magnituda;
-			}
-			
+			//if (input.Move == Vector2.zero)
+			//{
+			//	animator.SetFloat(_hashHorizontal, 0f, 0.2f, Time.deltaTime);
+			//	animator.SetFloat(_hashVertical, 0f, 0.2f, Time.deltaTime);
+				
+			//}
+			//else
+			//{
+			//	animator.SetFloat(_hashHorizontal,input.Move.x, 0.2f, Time.deltaTime);
+			//	animator.SetFloat(_hashVertical, input.Move.y, 0.2f, Time.deltaTime);
+			//	magnituda = input.Sprint ? input.Magnituda / 2f : input.Magnituda;
+			//}
+
+
+			magnituda = input.Sprint ? input.Magnituda / 2f : input.Magnituda;
+
+			if (magnituda > 0.0f && magnituda < 0.5f) magnituda = 0.5f;
+
 			_animationBlend = Mathf.Lerp(_animationBlend, magnituda, Time.deltaTime * SpeedChangeRate);
 
 
-			if (_animationBlend < 0.2f)
-				animator.SetFloat(_hashMagnituda, 0f, 0.2f, Time.deltaTime);
+			if (_animationBlend < 0.1f)
+			{
+				animator.SetFloat(_hashMagnituda, 0f);
+				animator.SetFloat(_hashHorizontal, 0f);
+				animator.SetFloat(_hashVertical, 0f);
+
+			}
 			else
 			{
 				animator.SetFloat(_hashMagnituda, _animationBlend, 0.2f, Time.deltaTime);
+				animator.SetFloat(_hashHorizontal, input.Move.x, 0.2f, Time.deltaTime);
+				animator.SetFloat(_hashVertical, input.Move.y, 0.2f, Time.deltaTime);
 			}
 
 		}
