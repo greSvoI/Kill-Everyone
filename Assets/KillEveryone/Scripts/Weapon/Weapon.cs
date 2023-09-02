@@ -16,5 +16,9 @@ namespace KillEveryone
 				p.Emit(1);
 			}
 		}
+		public void Reload()
+		{
+			
+		}
 	}
 }
