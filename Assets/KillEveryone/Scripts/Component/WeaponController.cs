@@ -13,6 +13,8 @@ namespace KillEveryone
 		}
 
 		[SerializeField] private Weapon weapon;
+		[SerializeField] private Transform leftHand;
+		[SerializeField] private Transform rightHand;
 
 		public bool _isFiring = false;
 		public bool _isEquip = false;
@@ -48,12 +50,19 @@ namespace KillEveryone
 			}
 		}
 
-		public void Equip(Weapon wnewWeapon)
+		public void Equip(Weapon newWeapon)
 		{
-			weapon = wnewWeapon;
+			weapon = newWeapon;
 			weapon.transform.parent = weaponHolder;
 			weapon.transform.localPosition = Vector3.zero;
 			weapon.transform.localRotation = Quaternion.identity;
+
+			leftHand.localPosition = weapon.leftHandIK.localPosition;
+			leftHand.localRotation = weapon.leftHandIK.localRotation;
+
+			rightHand.localPosition = weapon.rightHandIK.localPosition;
+			rightHand.localRotation = weapon.rightHandIK .localRotation;
+
 			rayCastOrigin = weapon.muzzle;
 			_isEquip = true;
 		}
@@ -110,6 +119,7 @@ namespace KillEveryone
 						break;
 					case 9:
 						HitEffect(enemyEffect);
+						hitInfo.collider.GetComponent<AIHitBox>().TakeDamage(10, ray.direction);
 						break;
 					default:
 						HitEffect(stoneEffect);
@@ -118,6 +128,7 @@ namespace KillEveryone
 
 				tracer.transform.position = hitInfo.point;
 			}
+			
 
 		}
 		private void HitEffect(ParticleSystem particle)

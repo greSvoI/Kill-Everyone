@@ -7,7 +7,9 @@ namespace KillEveryone
 	public class Weapon : MonoBehaviour
 	{
 		[SerializeField] private ParticleSystem []fireEffect;
-		[SerializeField] public Transform muzzle;
+	    public Transform muzzle;
+		public Transform leftHandIK;
+		public Transform rightHandIK;
 
 		public void Fire()
 		{

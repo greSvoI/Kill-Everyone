@@ -17,6 +17,7 @@ namespace KillEveryone
 
 		[Header("Parametrs name")]
 		[SerializeField] private string isAiming;
+		[SerializeField] private string isFire;
 		[SerializeField] private string horizontal;
 		[SerializeField] private string vertical;
 		[SerializeField] private string magnituda;
@@ -30,6 +31,7 @@ namespace KillEveryone
 		private int _hashVertical;
 		private int _hashMagnituda;
 		private int _hashIsAiming;
+		private int _hashIsFire;
 
 		private int _layerOnlyArms;
 
@@ -46,7 +48,7 @@ namespace KillEveryone
 
 		private void OnFire(bool obj)
 		{
-			
+			animator.SetBool(_hashIsFire, obj);
 		}
 
 		private void OnAim(bool obj)
@@ -56,7 +58,11 @@ namespace KillEveryone
 				animator.SetBool(_hashIsAiming, obj);
 				animator.SetLayerWeight(_layerOnlyArms, 1);
 			}
-			else animator.SetLayerWeight(_layerOnlyArms, 0);
+			else
+			{
+				animator.SetLayerWeight(_layerOnlyArms, 0);
+				
+			}
 		}
 
 		private void HashAnimationName()
@@ -65,6 +71,7 @@ namespace KillEveryone
 			_hashVertical = Animator.StringToHash(vertical);
 			_hashMagnituda = Animator.StringToHash(magnituda);
 			_hashIsAiming = Animator.StringToHash(isAiming);
+			_hashIsFire = Animator.StringToHash(isFire);
 
 			_layerOnlyArms = animator.GetLayerIndex(onlyArms);
 		}
