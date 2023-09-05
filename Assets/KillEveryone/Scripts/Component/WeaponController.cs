@@ -119,7 +119,13 @@ namespace KillEveryone
 						break;
 					case 9:
 						HitEffect(enemyEffect);
-						hitInfo.collider.GetComponent<AIHitBox>().TakeDamage(10, ray.direction);
+						
+						if(hitInfo.collider.TryGetComponent<AIHitBox>(out AIHitBox hitBox))
+						{
+							hitBox.TakeDamageBodyPart(20, ray.direction);
+						}
+
+						
 						break;
 					default:
 						HitEffect(stoneEffect);
