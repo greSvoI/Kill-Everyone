@@ -1387,7 +1387,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.11845252
+  m_Radius: 0.09
   m_Height: 0.47381008
   m_Direction: 0
   m_Center: {x: -0.23690504, y: 0, z: 0}
@@ -1829,13 +1829,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   damageEffect: {fileID: 0}
+  damage: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   _isCritical: 0
   _healthBodyPart: 20
   _healthBody: 100
-  _timeDestroy: 2
+  _timeDestroy: 40
+  _state: 0
 --- !u!1 &4872123756209415110
 GameObject:
   m_ObjectHideFlags: 0
@@ -4457,7 +4459,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.1
+  m_Radius: 0.09
   m_Height: 0.39293933
   m_Direction: 0
   m_Center: {x: -0.19646966, y: 0, z: 0}
@@ -4587,7 +4589,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.1178819
+  m_Radius: 0.09
   m_Height: 0.39293966
   m_Direction: 0
   m_Center: {x: -0.19646983, y: 0, z: 0}
@@ -5038,7 +5040,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.1
+  m_Radius: 0.09
   m_Height: 0.47383624
   m_Direction: 0
   m_Center: {x: -0.23691812, y: 0, z: 0}
@@ -5116,7 +5118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f213baf2f23ec46add467277d720a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyPart: 2
+  bodyPart: 3
   rigidMesh: {fileID: 9184988726746123745}
   bodyMesh: {fileID: 2494038137395680591}
   _health: 20

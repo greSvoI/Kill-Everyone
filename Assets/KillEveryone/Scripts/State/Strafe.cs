@@ -10,7 +10,7 @@ namespace KillEveryone
 		[SerializeField] private string _animatorStateName;
 		[SerializeField] private float _speed = 2f;
 		[SerializeField] private float _duration = 0.2f;
-		[SerializeField] private float _speedRotate = 2f;
+		//[SerializeField] private float _speedRotate = 2f;
 
 		public override void FixedUpdateState()
 		{
