@@ -3,7 +3,7 @@
 using UnityEngine.InputSystem;
 #endif
 
-/* Note: animations are called via the animatorController for both the character and capsule using animator null checks
+/* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
 namespace StarterAssets
@@ -15,10 +15,10 @@ namespace StarterAssets
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
-        [Tooltip("Move _speed of the character in m/s")]
+        [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
 
-        [Tooltip("Sprint _speed of the character in m/s")]
+        [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
 
         [Tooltip("How fast the character turns to face movement direction")]
@@ -63,10 +63,10 @@ namespace StarterAssets
         [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
         public GameObject CinemachineCameraTarget;
 
-        [Tooltip("How far in degrees can you _move the camera up")]
+        [Tooltip("How far in degrees can you move the camera up")]
         public float TopClamp = 70.0f;
 
-        [Tooltip("How far in degrees can you _move the camera down")]
+        [Tooltip("How far in degrees can you move the camera down")]
         public float BottomClamp = -30.0f;
 
         [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
@@ -166,7 +166,7 @@ namespace StarterAssets
             CameraRotation();
         }
 
-        private void AssignAnimationIDs()
+		private void AssignAnimationIDs()
         {
             _animIDSpeed = Animator.StringToHash("Speed");
             _animIDGrounded = Animator.StringToHash("Grounded");
@@ -213,13 +213,13 @@ namespace StarterAssets
 
         private void Move()
         {
-            // set target _speed based on _move _speed, _sprint _speed and if _sprint is pressed
+            // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is no input, set the target _speed to 0
+            // if there is no input, set the target speed to 0
             if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
             // a reference to the players current horizontal velocity
@@ -228,16 +228,16 @@ namespace StarterAssets
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
-            // accelerate or decelerate to target _speed
+            // accelerate or decelerate to target speed
             if (currentHorizontalSpeed < targetSpeed - speedOffset ||
                 currentHorizontalSpeed > targetSpeed + speedOffset)
             {
-                // creates curved result rather than a linear one giving a more organic _speed change
-                // note T in Lerp is clamped, so we don't need to clamp our _speed
+                // creates curved result rather than a linear one giving a more organic speed change
+                // note T in Lerp is clamped, so we don't need to clamp our speed
                 _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
                     Time.deltaTime * SpeedChangeRate);
 
-                // round _speed to 3 decimal places
+                // round speed to 3 decimal places
                 _speed = Mathf.Round(_speed * 1000f) / 1000f;
             }
             else
@@ -252,7 +252,7 @@ namespace StarterAssets
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            // if there is a _move input rotate player when the player is moving
+            // if there is a move input rotate player when the player is moving
             if (_input.move != Vector2.zero)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
@@ -267,7 +267,7 @@ namespace StarterAssets
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
-            // _move the player
+            // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
@@ -341,7 +341,7 @@ namespace StarterAssets
                 _input.jump = false;
             }
 
-            // apply gravity over time if under terminal (multiply by delta time twice to linearly _speed up over time)
+            // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
             if (_verticalVelocity < _terminalVelocity)
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
@@ -388,5 +388,19 @@ namespace StarterAssets
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
-    }
+
+		//public Transform IK;
+		//public Transform IKHint;
+		//public float weight = 0f;
+		//private void OnAnimatorIK(int layerIndex)
+		//{
+		//	_animator.SetIKPosition(AvatarIKGoal.LeftHand, IK.position);
+		//	_animator.SetIKHintPosition(AvatarIKHint.LeftElbow, IKHint.position);
+
+
+		//	_animator.SetIKRotation(AvatarIKGoal.LeftHand, IK.rotation);
+		//	_animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, weight);
+		//	_animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, weight);
+		//}
+	}
 }

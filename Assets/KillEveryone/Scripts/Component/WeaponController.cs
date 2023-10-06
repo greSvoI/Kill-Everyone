@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 namespace KillEveryone
@@ -11,19 +13,23 @@ namespace KillEveryone
 		{
 
 		}
+		[SerializeField] private IKController ikController;
+		[SerializeField] private AnimatorController animatorController;
+		private AudioController audioController;
 
-		[SerializeField] private Weapon weapon;
-		[SerializeField] private Transform leftHand;
-		[SerializeField] private Transform rightHand;
+
+		[SerializeField] private Weapon currentWeapon;
+
+		[SerializeField] private Weapon[] handHolder;
+		[SerializeField] private WeaponInventory[] bodyHolder;
+
+		[SerializeField] private TextMeshProUGUI bullet;
 
 		public bool _isFiring = false;
 		public bool _isEquip = false;
 
-		public RigController rigLayers;
-
 		public Transform rayCastOrigin;
 		public Transform rayCastDestination;
-		[SerializeField] private Transform weaponHolder;
 
 		public TrailRenderer traceEffect;
 
@@ -32,56 +38,108 @@ namespace KillEveryone
 		public ParticleSystem woodEffect;
 		public ParticleSystem enemyEffect;
 
-		public float _fireRate = 0.3f;
+		public float _fireRate = 0.1f;
+		public float _damage;
+		public int lastWeaponID = 0;
+		public int currentWeaponID = 0;
 
-		float _lastShot;
+		float _lastShot = 0f;
 
 		Ray ray;
 		RaycastHit hitInfo;
 
+		bool _hideWeapon = false;
+
+
+		public bool IsEquip => _isEquip;
+
 		private void Start()
 		{
-			rigLayers = GetComponent<RigController>();
+			ikController = GetComponent<IKController>();
+			animatorController = GetComponent<AnimatorController>();
+
+			EventManager.Weapon += OnWeapon;
+			EventManager.Reload += OnReload;
 			EventManager.Fire += OnFire;
-			Weapon exist = GetComponentInChildren<Weapon>();
-			if(exist)
+		}
+
+		private void OnReload()
+		{
+			if(_isEquip)
 			{
-				Equip(exist);
+				audioController.PlayReload();
 			}
 		}
 
+		private void OnWeapon(int obj)
+		{
+			//Hide Weapon
+            if (obj == 0 && _isEquip)
+            {
+				_hideWeapon = true;
+				_isEquip = false;
+				lastWeaponID = currentWeaponID;
+				animatorController.EquipWeapon(lastWeaponID);
+            }
+			///Draw Weapon
+			else
+			{
+				if(currentWeaponID == 0)
+				{
+					currentWeaponID = lastWeaponID = obj;
+					animatorController.EquipWeapon(currentWeaponID);
+				}
+
+				else
+				{
+					lastWeaponID = currentWeaponID;
+					currentWeaponID = obj;
+					animatorController.EquipWeapon(currentWeaponID);
+					
+				}
+
+			}
+        }
+
 		public void Equip(Weapon newWeapon)
 		{
-			weapon = newWeapon;
-			weapon.transform.parent = weaponHolder;
-			weapon.transform.localPosition = Vector3.zero;
-			weapon.transform.localRotation = Quaternion.identity;
+			//currentWeapon = newWeapon;
+			//currentWeapon.transform.parent = weaponHolder;
+			//currentWeapon.transform.localPosition = Vector3.zero;
+			//currentWeapon.transform.localRotation = Quaternion.identity;
 
-			leftHand.localPosition = weapon.leftHandIK.localPosition;
-			leftHand.localRotation = weapon.leftHandIK.localRotation;
+			////leftHand.localPosition = currentWeapon.leftHandIK.localPosition;
+			////leftHand.localRotation = currentWeapon.leftHandIK.localRotation;
 
-			rightHand.localPosition = weapon.rightHandIK.localPosition;
-			rightHand.localRotation = weapon.rightHandIK .localRotation;
+			////rightHand.localPosition = currentWeapon.rightHandIK.localPosition;
+			////rightHand.localRotation = currentWeapon.rightHandIK .localRotation;
 
-			rayCastOrigin = weapon.muzzle;
-			_isEquip = true;
+			////rayCastOrigin = currentWeapon.muzzle;
+			//_isEquip = true;
 		}
 
 		private void Update()
 		{
-			if(weapon && _isEquip)
+			if (currentWeapon && _isEquip)
 			{
-				if (_isFiring && rigLayers.aimRigLayer.weight > 0.9f)
+				if (_isFiring && ikController.LeftHandWeight > 0.9f)
 				{
-
-					if (Time.time > _lastShot + _fireRate)
+					if (Time.time > _lastShot + currentWeapon.fireRate)
 					{
 						Shoot();
 						_lastShot = Time.time;
 					}
 				}
 			}
+			BulletCheck();
 		}
+
+		private void BulletCheck()
+		{
+			if(currentWeapon)
+			bullet.text = currentWeapon.bulletClip + " / " + currentWeapon.bulletCount;
+		}
+
 		private void OnFire(bool obj)
 		{
 			_isFiring = obj;
@@ -92,20 +150,30 @@ namespace KillEveryone
 			if(rayCastOrigin != null)
 			Gizmos.DrawLine(rayCastOrigin.transform.position, rayCastDestination.transform.position);
 		}
+		
 		public void Shoot()
 		{
+			rayCastOrigin = currentWeapon.Muzzle;
+			if(currentWeapon.bulletClip == 0)
+			{
+				//audioController.PlayEmpty();
+				return;
+			}
+			currentWeapon.bulletClip--;
+			currentWeapon.bulletCount--;
 			
-			_isFiring = true;
-			weapon.Fire();
+			currentWeapon.Fire();
 			ray.origin = rayCastOrigin.position;
 			ray.direction = rayCastDestination.position - rayCastOrigin.position;
 
 			var tracer = Instantiate(traceEffect, ray.origin, Quaternion.identity);
 			tracer.AddPosition(ray.origin);
+
 			if(Physics.Raycast(ray, out hitInfo))
-			{
-				
-				switch(hitInfo.collider.gameObject.layer)
+			{				
+
+
+				switch (hitInfo.collider.gameObject.layer)
 				{
 					case 6:
 						HitEffect(metallEffect);
@@ -119,10 +187,10 @@ namespace KillEveryone
 						break;
 					case 9:
 						HitEffect(enemyEffect);
-						
-						if(hitInfo.collider.TryGetComponent<AIHitBox>(out AIHitBox hitBox))
+
+						if (hitInfo.collider.TryGetComponent<AIHitBox>(out AIHitBox hitBox))
 						{
-							hitBox.TakeDamageBodyPart(20, ray.direction);
+							hitBox.TakeDamageBodyPart(_damage, hitInfo.point);
 						}
 
 						
@@ -144,6 +212,80 @@ namespace KillEveryone
 			particle.Emit(1);
 		}
 
+		public void DrawWeapon(int index)
+		{
+
+			if(_isEquip && !_hideWeapon)
+			{
+				foreach(Weapon weapon in handHolder)
+				{
+					if(weapon.weaponID == currentWeaponID)
+					{
+						weapon.IsActive = true;
+						currentWeapon = weapon;
+						SetParamWeapon();
+					}
+					if(weapon.weaponID == lastWeaponID)
+						weapon.IsActive = false;
+				}
+				
+				foreach(WeaponInventory weapon in bodyHolder)
+				{
+					if(weapon.WeaponID == currentWeaponID)
+						weapon.IsActive = false;
+					if(weapon.WeaponID == lastWeaponID)
+						weapon.IsActive = true;
+				}
+				
+			}
+			else
+			{
+				//not working ???
+				///handHolder.First(x => x.weaponID == currentWeaponID).IsActive = _isStateWeapon;
+				///bodyHolder.First(x=> x.weaponID == currentWeaponID).IsActive = !_isStateWeapon;
+				
+				
+				bool state = true;
+
+				if (_hideWeapon)
+				{
+					state = false;
+				}
+				else
+					_isEquip = true;
+
+				foreach (Weapon weapon in handHolder)
+				{
+					if (weapon.weaponID == currentWeaponID)
+					{
+						weapon.IsActive = state;
+						currentWeapon = weapon;
+						SetParamWeapon();
+						
+					}
+				}
+				foreach (WeaponInventory weapon in bodyHolder)
+				{
+					if (weapon.WeaponID == currentWeaponID)
+						weapon.IsActive = !state;
+				}
+				if(_hideWeapon)
+				{
+					currentWeapon = null;
+					_hideWeapon = false;
+					currentWeaponID = lastWeaponID = 0;
+				}
+				
+			}
+
+		}
+		private void SetParamWeapon()
+		{
+			_fireRate = currentWeapon.fireRate;
+			_damage = currentWeapon.damage;
+			ikController.LeftHand = currentWeapon.LeftHand;
+			ikController.RightHand = currentWeapon.RightHand;
+		}
 		private void OnDestroy()
 		{
 			EventManager.Fire -= OnFire;

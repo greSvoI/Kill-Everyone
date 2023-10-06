@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace KillEveryone
 {
@@ -13,6 +15,7 @@ namespace KillEveryone
 		[SerializeField] private bool _sprint;
 		[SerializeField] private bool _rool;
 		[SerializeField] private bool _crouch;
+		[SerializeField] private int _currentWeapon;
 
 		[SerializeField] private bool _aim = false;
 		[SerializeField] private bool _fire = false;
@@ -21,9 +24,10 @@ namespace KillEveryone
 		public bool Sprint => _sprint;
 		public bool Roll => _rool;
 		public bool Crouch => _crouch;
-		public bool Aim => _aim;
+		public bool Aim { get=>_aim; set=>_aim = value; }
 		public bool Fire => _fire;
 		public float Magnituda => _magnituda;
+		public float CurrentWeapon => _currentWeapon;
 
 		private void Awake()
 		{
@@ -48,13 +52,27 @@ namespace KillEveryone
 
 			input.Player.Fire.performed += i => { 
 				_fire = i.ReadValueAsButton(); 
-				_aim = _fire;
-				EventManager.Aim?. Invoke(_aim);
+				//_aim = _fire;
+				//EventManager.Aim?. Invoke(_aim);
 				EventManager.Fire?.Invoke(_fire);
 			};
 			input.Player.Fire.canceled += i => { _fire = i.ReadValueAsButton(); EventManager.Fire?.Invoke(_fire); };
+			input.Player.Weapon.performed += OnWeapon;
+			input.Player.Reload.performed += i => EventManager.Reload?.Invoke();
 
 		}
+
+		private void OnWeapon(InputAction.CallbackContext context)
+		{
+			int weapon_index = 0;
+			int.TryParse(context.control.displayName, out weapon_index);
+
+			if(CurrentWeapon ==  weapon_index) { _currentWeapon = 0; }
+			else { _currentWeapon = weapon_index;}
+
+			EventManager.Weapon?.Invoke(_currentWeapon);
+		}
+
 		private void Update()
 		{
 			_magnituda = Mathf.Clamp01(Mathf.Abs(Move.x) + Mathf.Abs(Move.y));

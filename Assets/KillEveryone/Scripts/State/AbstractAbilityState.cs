@@ -18,6 +18,7 @@ namespace KillEveryone
 		protected AnimatorController animatorController;
 		protected MovementController moveController;
 		protected DetectionController detectionController;
+		protected WeaponController weaponController;
 
 
 
@@ -30,6 +31,7 @@ namespace KillEveryone
 			moveController = GetComponent<MovementController>();
 			detectionController = GetComponent<DetectionController>();
 			animatorController = GetComponent<AnimatorController>();
+			weaponController = GetComponent<WeaponController>();
 			input = GetComponent<PlayerInput>();
 			
 		}

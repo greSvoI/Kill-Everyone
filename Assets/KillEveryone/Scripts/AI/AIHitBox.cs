@@ -10,9 +10,22 @@ namespace KillEveryone
 	{
 		public enum BodyParts { Head, Body, BodyHandPart, BodyLegPart }
 
+		[Header("Part of the body")]
+		[Header("Select body if there are no parts")]
 		[SerializeField] private BodyParts bodyPart;
-		[SerializeField] private GameObject rigidMesh;
+
+		[Header("One part body")]
+		[SerializeField] private GameObject bodyPartMesh;
 		[SerializeField] private GameObject bodyMesh;
+
+		[Header("Many part body")]
+		[SerializeField] private GameObject[] bodyPartMeshs;
+		[SerializeField] private GameObject[] bodyMeshs;
+
+		[Header("Strenght fly")]
+		[SerializeField] private float _explosionForce = 25f;
+		[SerializeField] private float _explosionRadius = 25f;
+
 		private AIController controller;
 		private float _health;
 		private float _timeDestroy;
@@ -23,67 +36,81 @@ namespace KillEveryone
 			if (bodyPart == BodyParts.Body) _health = controller.dataZombie.BodyHealth;
 			else if(bodyPart == BodyParts.Head) _health = controller.dataZombie.HeadHealth;
 			else _health = controller.dataZombie.BodyPartHealth;
-
 			_timeDestroy = controller.dataZombie.TimeLifeAfterDie;
 		}
-		public void TakeDamageBodyPart(float damage, Vector3 direction)
+		public void TakeDamageBodyPart(float damage,Vector3 position)
 		{
-			controller.TakeDamage();
+			controller.TakeDamage(damage);
+			if (bodyPart == BodyParts.Body)
+				return;
+
 			_health -= damage;
-			if (_health <= 0)
+		
+			if(_health<=0)
 			{
 				switch (bodyPart)
 				{
 					case BodyParts.Head:
-						BodyPart(direction);
-						controller.SetRagdoll(false);
+						BodyPart(position, false);
+						controller.SetRagdoll(false, damage);
 						gameObject.SetActive(false);
 						break;
-					case BodyParts.Body:
-						controller.SetRagdoll(false);
-						break;
 					case BodyParts.BodyHandPart:
-						BodyPart(direction);
-						BodyPartChild(direction);
+						BodyPart(position, false);
 						break;
 					case BodyParts.BodyLegPart:
 						controller.IsCriticalDamage = true;
-						BodyPart(direction);
-						BodyPartChild(direction);
+						BodyPart(position, false);
 						break;
 				}
-
 			}
 		}
-		private void BodyPartChild(Vector3 direction)
+		public void BodyPart(Vector3 position,bool kinematic)
 		{
-			AIHitBox[] aIHit = gameObject.GetComponentsInChildren<AIHitBox>();
-			foreach (AIHitBox hitBox in aIHit)
-			{
-				if (hitBox != this)
-				{
-					hitBox.bodyMesh.SetActive(false);
-					hitBox.rigidMesh.GetComponent<MeshRenderer>().enabled = true;
-				}
-			}
-			gameObject.SetActive(false);
-		}
-		private void BodyPart(Vector3 direction)
-		{
-			bodyMesh.SetActive(false);
-
-			if (rigidMesh.TryGetComponent<BodyPart>(out BodyPart part))
-			{
-				part.TimeDestroy = controller.dataZombie.TimeLifeAfterDie;
-				part.Active();
-			}
-			else
-			{
-				rigidMesh.GetComponent<MeshRenderer>().enabled = true;
-				rigidMesh.GetComponent<Rigidbody>().isKinematic = false;
-			}
 			
-			rigidMesh.transform.parent = null;
+			if(bodyMesh)
+			{
+				if(bodyMesh.TryGetComponent<SkinnedMeshRenderer>(out SkinnedMeshRenderer meshRenderer))
+					meshRenderer.enabled = false;
+				else
+					bodyMesh.GetComponent<MeshRenderer>().enabled = false;
+			}
+
+			
+			
+			if(bodyPartMesh)
+			{
+				bodyPartMesh.transform.position = position - bodyPartMesh.GetComponent<MeshFilter>().mesh.bounds.center;
+				bodyPartMesh.transform.parent = null;
+				bodyPartMesh.GetComponent<BodyPart>().Active(position, kinematic);
+			}
+
+
+				AIHitBox[] hitBox = gameObject.GetComponentsInChildren<AIHitBox>();
+				foreach (AIHitBox box in hitBox)
+				{
+					if (box != this)
+					{
+						box.bodyMesh.SetActive(false);
+						if(bodyPartMesh)
+						box.bodyPartMesh.GetComponent<BodyPart>().Active(position, !kinematic);
+					}
+				}
+				gameObject.SetActive(false);
+			
+			
+				foreach(var mesh in bodyMeshs)
+				mesh.SetActive(false);
+
+			foreach (var part in bodyPartMeshs)
+				{
+					part.GetComponent<MeshRenderer>().enabled = true;
+					Rigidbody rb = part.GetComponent<Rigidbody>();
+					rb.isKinematic = false;
+					rb.AddExplosionForce(_explosionForce,transform.position,_explosionRadius);
+				}
+
+			
 		}
 	}
 }

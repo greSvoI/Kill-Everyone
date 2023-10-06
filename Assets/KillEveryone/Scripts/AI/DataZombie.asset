@@ -15,8 +15,8 @@ MonoBehaviour:
   BodyHealth: 100
   HeadHealth: 20
   BodyPartHealth: 20
-  TimeLifeAfterDie: 10
-  BodyLifeAfterDie: 10
+  TimeLifeAfterDie: 60
+  BodyLifeAfterDie: 60
   prefabDecal: {fileID: 250671786373035144, guid: 8594ab22cf31eab4cb17847ac7b0ca68,
     type: 3}
   bloodDecals:

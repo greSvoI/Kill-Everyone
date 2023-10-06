@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace KillEveryone
@@ -8,17 +9,29 @@ namespace KillEveryone
 	public class IKController : MonoBehaviour
 	{
 		private Animator animator;
+		private PlayerInput input;
+		private AnimatorController animatorController;
+		private WeaponController weaponController;
+		
+
+		[Header("IK Weapon Hand")]
 		[SerializeField] private Transform leftHand;
+		[SerializeField] private Transform leftHint;
+
 		[SerializeField] private Transform rightHand;
+		[SerializeField] private Transform rightHint;
 
 		[SerializeField] private Transform spine1;
 		[SerializeField] private Transform lookAtPosition;
 
+		[Header("IK Weapon Holder")]
+		[SerializeField] private Transform rightHolder;
+		[SerializeField] private Transform leftHolder;
 
 		[Space(2)]
 		[Header("Weight IK")]
-		[SerializeField] private float leftHandWeight = 0f;
-		[SerializeField] private float rightHandWeight = 0f;
+		[SerializeField] private float _leftHandWeight = 0f;
+		[SerializeField] private float _rightHandWeight = 0f;
 
 		[SerializeField] private float _lookWeight;
 		[SerializeField] private float _bodyWeight;
@@ -28,42 +41,111 @@ namespace KillEveryone
 
 		public Vector3 pos;
 
+		Coroutine returAim;
+
+		[SerializeField]  private float _upperAimDuration = 0.2f;
+		[SerializeField]  private float _lowerAimDuration = 0.2f;
+
+		public float LeftHandWeight => _leftHandWeight;
+		public Transform LeftHand { get=>leftHand; set => leftHand = value; }
+		public Transform RightHand { get=>rightHand; set => rightHand = value; }
+
 		private void Start()
 		{
 			animator = GetComponent<Animator>();
+			input = GetComponent<PlayerInput>();
+			animatorController = GetComponent<AnimatorController>();
+			weaponController = GetComponent<WeaponController>();
+			
+
 			EventManager.Aim += OnAim;
+			EventManager.Weapon += OnWeapon;
+			EventManager.Reload += OnReload;
+		}
+
+		private void OnReload()
+		{
+			OnWeapon(1);
+		}
+
+		private void OnWeapon(int obj)
+		{
+			if (obj != 0)
+			{
+				_rightHandWeight = 0f;
+				_leftHandWeight = 0f;
+				StartCoroutine(ReturnAim());
+			}
+			else
+				_leftHandWeight = 0.5f;
+		}
+
+		private IEnumerator ReturnAim()
+		{
+			bool draw = true;
+			while (draw)
+			{
+				yield return null;
+				if(!animatorController.IsDrawWeapon && !animatorController.IsReload) draw = false;
+			}
+
+			input.Aim = true;
+		}
+		private void FixedUpdate()
+		{
+			if (weaponController.IsEquip)
+			{
+
+				if (animatorController.IsReload || animatorController.IsDrawWeapon)
+				{
+					LowerHandWeight();
+					return;
+				}
+
+				if (input.Aim || input.Fire)
+				{
+					UpperHandWeight();
+				}
+				else
+				{
+					LowerHandWeight();
+				}
+
+			}
+			else
+			{
+				LowerHandWeight();
+			}
 		}
 		private void Update()
 		{
-			//LeftHand();
-		}
-		[ContextMenu("Print1")]
-		private void LeftHand1()
-		{
-			float positionY = (spine1.localEulerAngles.y / 100);
-			positionY = Mathf.Clamp(positionY, 0.1f, 0.0f);
-			Vector3 temp = Vector3.zero;
-			temp = leftHand.localPosition;
-			Debug.Log(temp);
-			temp.y = positionY;
 
-			leftHand.position = temp;
+			
 		}
-		private void LeftHand()
+		private void LowerHandWeight()
 		{
-			float positionY = (spine1.localEulerAngles.y / 100);
-			positionY = Mathf.Clamp(positionY, 0.1f, 0.0f);
-			Vector3 temp = Vector3.zero;
-			temp = leftHand.position;
-			temp.y = positionY;
+			if (_leftHandWeight > 0f || _rightHandWeight > 0f)
+			{
+				_rightHandWeight -= Time.deltaTime / _lowerAimDuration;
+				_leftHandWeight -= Time.deltaTime / _lowerAimDuration;
+			}
+		}
+		private void UpperHandWeight()
+		{
+			if (_leftHandWeight < 1f )
+			{
+				if(_rightHandWeight < 1f)
+				_rightHandWeight += Time.deltaTime / _upperAimDuration;
 
-			leftHand.position = temp;
+				if(_rightHandWeight > 0.5f)
+					_leftHandWeight += Time.deltaTime / _upperAimDuration;
+			}
 		}
 
 		#region EventManager
 		private void OnAim(bool obj)
 		{
-			leftHandWeight = obj ? 1f : 0f;
+			
 		}
 		#endregion
 
@@ -74,21 +156,35 @@ namespace KillEveryone
 			//LeftHand
 			if (leftHand != null)
 			{
-				animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftHandWeight);
-				animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHand.position);
+				animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, _leftHandWeight);
+				animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, _leftHandWeight);
 
-				animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftHandWeight);
+				animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHand.position);
 				animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHand.rotation);
+
+				animator.SetIKHintPosition(AvatarIKHint.LeftElbow, leftHint.position);
+				animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, _leftHandWeight);
 			}
 
 			//RightHand
 			if (rightHand != null)
 			{
-				animator.SetIKPositionWeight(AvatarIKGoal.RightHand, rightHandWeight);
+				rightHand.LookAt(lookAtPosition.position);
+
+				Vector3 rot = rightHand.rotation.eulerAngles;
+				Quaternion quat = Quaternion.Euler(rot.x, rot.y, -90f);
+
+				rightHand.rotation = Quaternion.Lerp(Quaternion.Euler(rot), quat,1f);
+
+
+				animator.SetIKPositionWeight(AvatarIKGoal.RightHand, _rightHandWeight);
 				animator.SetIKPosition(AvatarIKGoal.RightHand, rightHand.position);
 
-				animator.SetIKRotationWeight(AvatarIKGoal.RightHand, rightHandWeight);
+				animator.SetIKRotationWeight(AvatarIKGoal.RightHand, _rightHandWeight);
 				animator.SetIKRotation(AvatarIKGoal.RightHand, rightHand.rotation);
+
+				animator.SetIKHintPosition(AvatarIKHint.RightElbow, rightHint.position);
+				animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, _rightHandWeight);
 			}
 
 			
@@ -97,6 +193,8 @@ namespace KillEveryone
 		private void OnDestroy()
 		{
 			EventManager.Aim -= OnAim;
+			EventManager.Weapon -= OnWeapon;
+			EventManager.Reload -= OnReload;
 		}
 	}
 }

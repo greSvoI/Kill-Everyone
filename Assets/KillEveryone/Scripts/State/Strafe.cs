@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
@@ -29,9 +30,13 @@ namespace KillEveryone
 
 		public override bool ReadyToStart()
 		{
-			return input.Aim && detectionController.IsGrounded();
-		}
+			if (weaponController.IsEquip)
+			{
+				return input.Aim && detectionController.IsGrounded() || input.Fire;	
+			}
+			else return false;
 
+		}
 		public override void UpdateState()
 		{
 
@@ -42,7 +47,7 @@ namespace KillEveryone
 			
 			transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
 
-			if (!input.Aim)
+			if (!input.Aim && !input.Fire || !weaponController.IsEquip)
 				StopState();
 		}
 	}

@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace KillEveryone
 {
+	[ExecuteInEditMode]
 	public class DetectionController : MonoBehaviour
 	{
 
 		[SerializeField] private LayerMask groundLayer;
-		[SerializeField] private float _radiusSphere;
 
 		[Header("Check grounded")]
 		[SerializeField] private float _groundOffset = 0.2f;
@@ -43,8 +43,6 @@ namespace KillEveryone
 			Color redColor = Color.red;
 			Color greenColor = Color.green;
 			Gizmos.color = greenColor;	
-
-			//Gizmos.DrawWireSphere(transform.position, _radiusSphere);
 
 			if(IsGrounded())
 			{

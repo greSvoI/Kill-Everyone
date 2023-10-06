@@ -37,6 +37,10 @@ namespace KillEveryone
 		private void Update()
 		{
 			ApllyGravity();
+			if(input.Move != Vector2.zero)
+			{
+				Move(input.Move, 5f);
+			}
 			controller.Move(velocity * Time.deltaTime);
 		}
 		public void ApllyGravity()
@@ -57,7 +61,7 @@ namespace KillEveryone
 			float targetRotation = 0f;
 		    _speed = Mathf.Lerp(_speed, targetSpeed * input.Move.magnitude, Time.deltaTime * SpeedChangeRate);
 
-			if (_speed < 0.2f) _speed = 0f;
+			//if (_speed < 0.3f) _speed = 0f;
 
 			if (moveInput != Vector2.zero)
 			{
