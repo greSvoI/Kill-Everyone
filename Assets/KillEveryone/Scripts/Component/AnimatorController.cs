@@ -32,8 +32,6 @@ namespace KillEveryone
 
 		private float _animationBlend = 0f;
 
-		private string drawWeapon = "Draw Weapon HighLeft";
-
 		private int _hashHorizontal;
 		private int _hashVertical;
 		private int _hashMagnituda;
@@ -123,6 +121,8 @@ namespace KillEveryone
 		{
 			
 		}
+		float x;
+		float y;
 		public void UpdateAnimatorParametrs()
 		{
 			float magnituda = 0f;
@@ -130,7 +130,7 @@ namespace KillEveryone
 			//{
 			//	animator.SetFloat(_hashHorizontal, 0f, 0.2f, Time.deltaTime);
 			//	animator.SetFloat(_hashVertical, 0f, 0.2f, Time.deltaTime);
-				
+
 			//}
 			//else
 			//{
@@ -139,15 +139,21 @@ namespace KillEveryone
 			//	magnituda = input.Sprint ? input.Magnituda / 2f : input.Magnituda;
 			//}
 
-
+			Vector2 move = input.Move;
+			move.Normalize();
 			magnituda = input.Sprint ? input.Magnituda / 2f : input.Magnituda;
-
+			//x = Mathf.Lerp(x, move.x, Time.deltaTime * SpeedChangeRate);
+			//y = Mathf.Lerp(y, move.y, Time.deltaTime * SpeedChangeRate);
+			x = move.x;
+			y = move.y;
 			//if (magnituda > 0.0f && magnituda < 0.5f) magnituda = 0.5f;
 
 			_animationBlend = Mathf.Lerp(_animationBlend, magnituda, Time.deltaTime * SpeedChangeRate);
-			animator.SetFloat(_hashMagnituda, _animationBlend, 0.2f, Time.deltaTime);
-			animator.SetFloat(_hashHorizontal, input.Move.x, 0.2f, Time.deltaTime);
-			animator.SetFloat(_hashVertical, input.Move.y, 0.2f, Time.deltaTime);
+			animator.SetFloat(_hashMagnituda, _animationBlend,0.2f,Time.deltaTime * SpeedChangeRate);
+
+
+			animator.SetFloat(_hashHorizontal,x , 0.2f,Time.deltaTime * SpeedChangeRate);
+			animator.SetFloat(_hashVertical,y, 0.2f ,Time.deltaTime * SpeedChangeRate);
 
 			//if (_animationBlend < 0.1f)
 			//{

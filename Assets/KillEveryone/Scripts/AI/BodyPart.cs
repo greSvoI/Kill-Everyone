@@ -11,10 +11,10 @@ namespace KillEveryone
 	{
 		private MeshRenderer meshRenderer;
 		private Rigidbody rigidBody;
-		private GameObject decal;
 		private AIController controller;
+		private GameObject decal;
 
-		[SerializeField] private DataZombie dataZombie;
+		private bool _isActive = false;
 
 		private float _timeDestroy = 20f;
 		public float TimeDestroy { set => _timeDestroy = value; }
@@ -26,9 +26,13 @@ namespace KillEveryone
 			controller = GetComponentInParent<AIController>();
 			meshRenderer.enabled = false;
 
-			decal = Instantiate(controller.dataZombie.prefabDecal);
-			Material material = controller.dataZombie.bloodDecals[Random.Range(0,controller.dataZombie.bloodDecals.Length - 1)];
-			decal.GetComponent<BloodDecal>().Initialize(material, new Vector3(2f, 0.001f, 2f));
+			//decal = Instantiate(controller.dataOrks.PrefabDecal,transform);
+			//Material material = controller.dataOrks.BloodDecals[Random.Range(0, controller.dataOrks.BloodDecals.Length - 1)];
+
+			//float min = controller.dataOrks.bloodDecalBodyPartsMin;
+			//float max = controller.dataOrks.bloodDecalBodyPartsMax;
+			//decal.GetComponent<BloodDecal>().Initialize(material,new Vector3(Random.Range(min,max), 0.001f, Random.Range(min,max)));
+	
 		}
 		
 		[ContextMenu("Rename object to part body")]
@@ -39,12 +43,21 @@ namespace KillEveryone
 			name = name.Substring(0,name.IndexOfAny(value));
 			this.gameObject.name = name + "_Part";
 		}
-
-		public void Active(Vector3 position,bool kinematic)
+		public void TakeDamage(float damage)
 		{
+			controller.TakeDamage(damage);
+		}
+		public void Active(Vector3 position)
+		{
+			transform.parent = null;
+			transform.position = position;
 			meshRenderer.enabled = true;
-			rigidBody.isKinematic = kinematic;
-			StartCoroutine(StartDestroy());
+			rigidBody.isKinematic = false;
+			//StartCoroutine(StartDestroy());
+		}
+		public void DeActivate()
+		{
+
 		}
 		private IEnumerator StartDestroy()
 		{
@@ -53,15 +66,12 @@ namespace KillEveryone
 		}
 		private void OnCollisionEnter(Collision collision)
 		{
-			if(collision.collider.gameObject.layer == LayerMask.NameToLayer("Default"))
+			if (collision.gameObject.layer == 11 && !_isActive)
 			{
-				rigidBody.isKinematic = true;
-			}
-			if (collision.gameObject.layer == 11)
-			{
+				Debug.Log(transform.position);
+				_isActive = true;
+				controller.DrawDecal(transform.position);
 
-				decal.GetComponent<BloodDecal>().Active(collision.contacts[0].point);
-				decal.transform.rotation = Quaternion.Euler(-90, collision.contacts[0].point.x, collision.contacts[0].point.z);
 			}
 		}
 	}

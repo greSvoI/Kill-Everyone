@@ -21,7 +21,7 @@ namespace KillEveryone
 
 		private void Update()
 		{
-			
+
 		}
 		public bool ground;
 		public bool IsGrounded()

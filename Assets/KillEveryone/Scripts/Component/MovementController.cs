@@ -55,22 +55,28 @@ namespace KillEveryone
 			}
 			
 		}
+		public Vector3 moveDirection;
 		public void Move(Vector2 moveInput, float targetSpeed, bool rotateCharacter = true)
 		{
-			
 			float targetRotation = 0f;
-		    _speed = Mathf.Lerp(_speed, targetSpeed * input.Move.magnitude, Time.deltaTime * SpeedChangeRate);
+			_speed = Mathf.Lerp(_speed, targetSpeed * input.Move.magnitude, Time.deltaTime * SpeedChangeRate);
 
 			//if (_speed < 0.3f) _speed = 0f;
 
 			if (moveInput != Vector2.zero)
 			{
-				targetRotation = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg +  mainCamera.transform.eulerAngles.y;
+				targetRotation = Mathf.Atan2(moveInput.x, moveInput.y) * Mathf.Rad2Deg + mainCamera.transform.eulerAngles.y;
 				float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref _rotationVelocity, RotationSmoothTime);
 
 
 				if (rotateCharacter)
-					transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+				{
+					transform.rotation = Quaternion.Slerp( transform.rotation,Quaternion.Euler(0f,rotation,0f),1f);
+				}
+				else
+				{
+					transform.rotation = Quaternion.Slerp(transform.rotation, mainCamera.rotation , 1f);
+				}
 			}
 
 			Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;

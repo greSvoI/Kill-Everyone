@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CrossHairTarget : MonoBehaviour
@@ -7,14 +5,16 @@ public class CrossHairTarget : MonoBehaviour
 	private Camera mainCamera;
 	private Ray ray;
 	private RaycastHit hit;
+	public LayerMask layerMask;
 	private void Start()
 	{
 		mainCamera = Camera.main;
 	}
 	private void Update()
 	{
-		ray.origin = mainCamera.transform.position;
-		ray.direction = mainCamera.transform.forward;
+		Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+		ray = mainCamera.ScreenPointToRay(screenCenter);
+
 		Physics.Raycast(ray, out hit);
 		transform.position = hit.point;
 	}

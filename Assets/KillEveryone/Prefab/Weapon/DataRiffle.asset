@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c33063d1d049d4a839655113a101ca, type: 3}
+  m_Name: DataRiffle
+  m_EditorClassIdentifier: 
+  WeaponClass: 2
+  WeaponHolder: 4
+  tracerShootEffect: {fileID: 5376039337588358303, guid: f336c5bd23b960540991ba5ff4738ef3,
+    type: 3}
+  tracerRocketEffect: {fileID: 0}
+  explosionEffect: {fileID: 0}
+  Fire: {fileID: 8300000, guid: 097e8235e0162d64ba53da9ef4ab8d61, type: 3}
+  EmptyClip: {fileID: 8300000, guid: 9b2ce00d16b72c34a9b46200421a6def, type: 3}
+  Reload: {fileID: 8300000, guid: f4b0865c53d458d49a58b67d16d4b711, type: 3}
+  Equip: {fileID: 8300000, guid: 50181d03f42034b4da3a8c48ce086e2d, type: 3}
+  FireRate: 0.1
+  Damage: 25
+  BulletMax: 10000
+  BulletClip: 10000
+  BulletCount: 10000
+  WeaponID: 2
+  ReloadID: 2

@@ -32,9 +32,10 @@ namespace KillEveryone
 		{
 			if (weaponController.IsEquip)
 			{
-				return input.Aim && detectionController.IsGrounded() || input.Fire;	
+				return input.Aim && detectionController.IsGrounded() || input.Fire;
 			}
 			else return false;
+
 
 		}
 		public override void UpdateState()

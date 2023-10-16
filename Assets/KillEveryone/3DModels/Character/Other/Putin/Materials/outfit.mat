@@ -58,7 +58,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: eb63dcb9c66256547b75840126b9cc03, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7268af0c46f844d4a8cd6dcff4fef104, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -96,13 +96,13 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Dissolve: 1
+    - _Dissolve: 1.14
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _Metallic: 0
+    - _Metallic: 0.5
     - _Mode: 0
     - _Noise: 0
     - _OcclusionStrength: 1
@@ -111,13 +111,13 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Rotate: 0
-    - _Smoothness: 0
+    - _Rotate: 1.9
+    - _Smoothness: 0.29
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StrengthNormal: 0.5
-    - _Substract: 0.58
+    - _Substract: 0.384
     - _Surface: 0
     - _UVSec: 0
     - _WorkflowMode: 1

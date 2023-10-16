@@ -8,11 +8,11 @@ public class HeadPart : MonoBehaviour
 {
 	private GameObject decal;
 
-	[SerializeField] private DataZombie dataZombie;
+	[SerializeField] private DataOrks dataZombie;
 	private void Start()
 	{
-		decal = Instantiate(dataZombie.prefabDecal);
-		Material material = dataZombie.bloodDecals[Random.Range(0, dataZombie.bloodDecals.Length - 1)];
+		decal = Instantiate(dataZombie.PrefabDecal);
+		Material material = dataZombie.BloodDecals[Random.Range(0, dataZombie.BloodDecals.Length - 1)];
 		decal.GetComponent<BloodDecal>().Initialize(material, new Vector3(2f,0.001f,2f));
 		
 	}

@@ -1,3 +1,4 @@
+using Autodesk.Fbx;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,13 +14,14 @@ namespace KillEveryone
 		{
 
 		}
-		[SerializeField] private IKController ikController;
-		[SerializeField] private AnimatorController animatorController;
+
 		private AudioController audioController;
+		private IKController ikController;
+		private AnimatorController animatorController;
+		private Weapon currentWeapon;
 
-
-		[SerializeField] private Weapon currentWeapon;
-
+		[SerializeField] private GameObject blood;
+		[SerializeField] private DataHitEffect effects;
 		[SerializeField] private Weapon[] handHolder;
 		[SerializeField] private WeaponInventory[] bodyHolder;
 
@@ -31,7 +33,7 @@ namespace KillEveryone
 		public Transform rayCastOrigin;
 		public Transform rayCastDestination;
 
-		public TrailRenderer traceEffect;
+
 
 		public ParticleSystem metallEffect;
 		public ParticleSystem stoneEffect;
@@ -48,6 +50,9 @@ namespace KillEveryone
 		Ray ray;
 		RaycastHit hitInfo;
 
+		//Gizmo
+		Ray line;
+
 		bool _hideWeapon = false;
 
 
@@ -61,6 +66,23 @@ namespace KillEveryone
 			EventManager.Weapon += OnWeapon;
 			EventManager.Reload += OnReload;
 			EventManager.Fire += OnFire;
+			GameObject obj = new GameObject("HitEffect");
+			obj.transform.parent = transform;
+
+			stoneEffect = Instantiate(effects.StoneEffect,obj.transform);
+			woodEffect = Instantiate(effects.WoodEffect, obj.transform);
+			enemyEffect = Instantiate(effects.EnemyEffect, obj.transform);
+			metallEffect = Instantiate(effects.MetallEffect, obj.transform);
+		}
+		private void OnDrawGizmos()
+		{
+			Gizmos.color = Color.red;
+			if (currentWeapon)
+			{
+				line.origin = rayCastOrigin.position;
+				line.direction = rayCastDestination.position - rayCastOrigin.position;
+				Gizmos.DrawRay(rayCastOrigin.position,rayCastDestination.position - rayCastOrigin.position);
+			}
 		}
 
 		private void OnReload()
@@ -78,6 +100,7 @@ namespace KillEveryone
             {
 				_hideWeapon = true;
 				_isEquip = false;
+				EventManager.Equip?.Invoke(_isEquip);
 				lastWeaponID = currentWeaponID;
 				animatorController.EquipWeapon(lastWeaponID);
             }
@@ -136,43 +159,34 @@ namespace KillEveryone
 
 		private void BulletCheck()
 		{
-			if(currentWeapon)
-			bullet.text = currentWeapon.bulletClip + " / " + currentWeapon.bulletCount;
+			//if(currentWeapon)
+			//bullet.text = currentWeapon.bulletClip + " / " + currentWeapon.bulletCount;
 		}
 
 		private void OnFire(bool obj)
 		{
 			_isFiring = obj;
 		}
-		private void OnDrawGizmos()
-		{
-			Gizmos.color = Color.yellow;
-			if(rayCastOrigin != null)
-			Gizmos.DrawLine(rayCastOrigin.transform.position, rayCastDestination.transform.position);
-		}
 		
 		public void Shoot()
 		{
-			rayCastOrigin = currentWeapon.Muzzle;
 			if(currentWeapon.bulletClip == 0)
 			{
 				//audioController.PlayEmpty();
 				return;
 			}
+			
 			currentWeapon.bulletClip--;
 			currentWeapon.bulletCount--;
 			
-			currentWeapon.Fire();
+
 			ray.origin = rayCastOrigin.position;
 			ray.direction = rayCastDestination.position - rayCastOrigin.position;
 
-			var tracer = Instantiate(traceEffect, ray.origin, Quaternion.identity);
-			tracer.AddPosition(ray.origin);
-
 			if(Physics.Raycast(ray, out hitInfo))
-			{				
-
-
+			{
+				currentWeapon.Attack(hitInfo);
+				if (currentWeapon.weaponClass != EnumClass.WeaponClass.Rocket)
 				switch (hitInfo.collider.gameObject.layer)
 				{
 					case 6:
@@ -186,21 +200,31 @@ namespace KillEveryone
 						HitEffect(stoneEffect);
 						break;
 					case 9:
-						HitEffect(enemyEffect);
+						
 
 						if (hitInfo.collider.TryGetComponent<AIHitBox>(out AIHitBox hitBox))
 						{
-							hitBox.TakeDamageBodyPart(_damage, hitInfo.point);
-						}
+							hitBox.TakeDamageBodyPart(_damage, hitInfo,currentWeapon.weaponClass);
+							
 
-						
+						}
+							GameObject hitts = Instantiate(blood, hitInfo.point - ray.direction * 0.1f, transform.rotation);
+							//hitts.transform.parent = hitBox.transform;
+							HitEffect(enemyEffect);
 						break;
+					case 10:
+							if (hitInfo.collider.TryGetComponent<BodyPart>(out BodyPart part))
+							{
+								part.TakeDamage(_damage);
+							}
+							HitEffect(enemyEffect);
+							break;
+
 					default:
+						
 						HitEffect(stoneEffect);
 						break;
 				}
-
-				tracer.transform.position = hitInfo.point;
 			}
 			
 
@@ -211,7 +235,6 @@ namespace KillEveryone
 			particle.transform.forward = hitInfo.normal;
 			particle.Emit(1);
 		}
-
 		public void DrawWeapon(int index)
 		{
 
@@ -241,8 +264,8 @@ namespace KillEveryone
 			else
 			{
 				//not working ???
-				///handHolder.First(x => x.weaponID == currentWeaponID).IsActive = _isStateWeapon;
-				///bodyHolder.First(x=> x.weaponID == currentWeaponID).IsActive = !_isStateWeapon;
+				///handHolder.First(x => x.WeaponClass == currentWeaponID).IsActive = _isStateWeapon;
+				///bodyHolder.First(x=> x.WeaponClass == currentWeaponID).IsActive = !_isStateWeapon;
 				
 				
 				bool state = true;
@@ -252,7 +275,10 @@ namespace KillEveryone
 					state = false;
 				}
 				else
+				{
 					_isEquip = true;
+					EventManager.Equip?.Invoke(_isEquip);
+				}
 
 				foreach (Weapon weapon in handHolder)
 				{
@@ -281,6 +307,7 @@ namespace KillEveryone
 		}
 		private void SetParamWeapon()
 		{
+			rayCastOrigin = currentWeapon.Muzzle;
 			_fireRate = currentWeapon.fireRate;
 			_damage = currentWeapon.damage;
 			ikController.LeftHand = currentWeapon.LeftHand;

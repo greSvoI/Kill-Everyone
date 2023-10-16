@@ -74,7 +74,7 @@ namespace KillEveryone
 			{
 				_rightHandWeight = 0f;
 				_leftHandWeight = 0f;
-				StartCoroutine(ReturnAim());
+				//StartCoroutine(ReturnAim());
 			}
 			else
 				_leftHandWeight = 0.5f;
@@ -92,6 +92,10 @@ namespace KillEveryone
 			input.Aim = true;
 		}
 		private void FixedUpdate()
+		{
+			
+		}
+		private void Update()
 		{
 			if (weaponController.IsEquip)
 			{
@@ -116,11 +120,7 @@ namespace KillEveryone
 			{
 				LowerHandWeight();
 			}
-		}
-		private void Update()
-		{
 
-			
 		}
 		private void LowerHandWeight()
 		{
@@ -137,7 +137,7 @@ namespace KillEveryone
 				if(_rightHandWeight < 1f)
 				_rightHandWeight += Time.deltaTime / _upperAimDuration;
 
-				if(_rightHandWeight > 0.5f)
+				//if(_rightHandWeight > 0.9f)
 					_leftHandWeight += Time.deltaTime / _upperAimDuration;
 			}
 		}
@@ -174,7 +174,7 @@ namespace KillEveryone
 				Vector3 rot = rightHand.rotation.eulerAngles;
 				Quaternion quat = Quaternion.Euler(rot.x, rot.y, -90f);
 
-				rightHand.rotation = Quaternion.Lerp(Quaternion.Euler(rot), quat,1f);
+				rightHand.rotation = Quaternion.Lerp(Quaternion.Euler(rot), quat, 1f);
 
 
 				animator.SetIKPositionWeight(AvatarIKGoal.RightHand, _rightHandWeight);
@@ -187,7 +187,7 @@ namespace KillEveryone
 				animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, _rightHandWeight);
 			}
 
-			
+
 
 		}
 		private void OnDestroy()

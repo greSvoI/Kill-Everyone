@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c33063d1d049d4a839655113a101ca, type: 3}
+  m_Name: DataRocket
+  m_EditorClassIdentifier: 
+  WeaponClass: 4
+  WeaponHolder: 1
+  tracerShootEffect: {fileID: 0}
+  tracerRocketEffect: {fileID: 6500574273159744882, guid: ee00bbd82e7bd1f4e8a3acab4639d005,
+    type: 3}
+  explosionEffect: {fileID: 5425862425134363276, guid: 850f66e37a264da48945485d36ffb74a,
+    type: 3}
+  Fire: {fileID: 0}
+  EmptyClip: {fileID: 0}
+  Reload: {fileID: 0}
+  Equip: {fileID: 8300000, guid: d0419404a667f6e47ae5704cd366ffa3, type: 3}
+  FireRate: 0.5
+  Damage: 100
+  BulletMax: 12
+  BulletClip: 6
+  BulletCount: 12
+  WeaponID: 3
+  ReloadID: 0

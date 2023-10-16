@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c33063d1d049d4a839655113a101ca, type: 3}
+  m_Name: DataPistol
+  m_EditorClassIdentifier: 
+  WeaponClass: 1
+  WeaponHolder: 2
+  tracerShootEffect: {fileID: 5376039337588358303, guid: f336c5bd23b960540991ba5ff4738ef3,
+    type: 3}
+  tracerRocketEffect: {fileID: 0}
+  explosionEffect: {fileID: 0}
+  Fire: {fileID: 8300000, guid: 4912d5c56ce571e4fbad7af6de655772, type: 3}
+  EmptyClip: {fileID: 8300000, guid: 9c5ac02550d31504ebb57020dde8e988, type: 3}
+  Reload: {fileID: 8300000, guid: cc03a3bc3d3003c428240bcd6e12c487, type: 3}
+  Equip: {fileID: 8300000, guid: 97cc681a105798a44916efd675389042, type: 3}
+  FireRate: 0.3
+  Damage: 10
+  BulletMax: 10000
+  BulletClip: 10000
+  BulletCount: 10000
+  WeaponID: 1
+  ReloadID: 1

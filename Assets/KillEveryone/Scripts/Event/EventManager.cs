@@ -10,6 +10,7 @@ namespace KillEveryone
 		public static Action<bool> Aim {  get; set; }
 		public static Action<bool> Fire {  get; set; }
 		public static Action<int> Weapon { get; set; }
+		public static Action<bool> Equip { get; set; }
 		public static Action Reload { get; set; }
 	}
 }

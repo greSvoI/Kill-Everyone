@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 using UnityEngine.Windows;
 
 namespace KillEveryone
@@ -30,10 +32,13 @@ namespace KillEveryone
 
 		private void Update()
 		{
-			
+
 		}
+
+		public float smoothing = 1.0f; // Параметр сглаживания
 		private void LateUpdate()
 		{
+			
 			CameraRotation();
 		}
 		private void CameraRotation()
@@ -41,10 +46,14 @@ namespace KillEveryone
 			_cameraInputY += input.Look.y * _sensivity;
 			_cameraInputX += input.Look.x * _sensivity;
 
+			
+
+
 			_cameraInputX = ClampAngle(_cameraInputX, float.MinValue, float.MaxValue);
 			_cameraInputY = ClampAngle(_cameraInputY, BottomClamp, TopClamp);
 
 			_followCamera.transform.rotation = Quaternion.Euler(_cameraInputY, _cameraInputX, 0f);
+			//_followCamera.transform.rotation = Quaternion.Slerp(_followCamera.transform.rotation, Quaternion.Euler(_cameraInputY, _cameraInputX, 0f),smoothing);
 		}
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
 		{

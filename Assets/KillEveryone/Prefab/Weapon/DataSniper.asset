@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c33063d1d049d4a839655113a101ca, type: 3}
+  m_Name: DataSniper
+  m_EditorClassIdentifier: 
+  WeaponClass: 3
+  WeaponHolder: 3
+  tracerShootEffect: {fileID: 5376039337588358303, guid: f336c5bd23b960540991ba5ff4738ef3,
+    type: 3}
+  tracerRocketEffect: {fileID: 0}
+  explosionEffect: {fileID: 0}
+  Fire: {fileID: 0}
+  EmptyClip: {fileID: 0}
+  Reload: {fileID: 0}
+  Equip: {fileID: 0}
+  FireRate: 0.5
+  Damage: 50
+  BulletMax: 100
+  BulletClip: 100
+  BulletCount: 100
+  WeaponID: 4
+  ReloadID: 2

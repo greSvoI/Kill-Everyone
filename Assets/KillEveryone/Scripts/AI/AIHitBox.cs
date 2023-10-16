@@ -1,116 +1,160 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace KillEveryone
 {
 	public class AIHitBox : MonoBehaviour
 	{
-		public enum BodyParts { Head, Body, BodyHandPart, BodyLegPart }
+		
 
 		[Header("Part of the body")]
 		[Header("Select body if there are no parts")]
-		[SerializeField] private BodyParts bodyPart;
+		[SerializeField] private EnumClass.BodyParts bodyPart;
 
 		[Header("One part body")]
 		[SerializeField] private GameObject bodyPartMesh;
-		[SerializeField] private GameObject bodyMesh;
+		[SerializeField] private GameObject bodySkinnedMesh;
 
 		[Header("Many part body")]
-		[SerializeField] private GameObject[] bodyPartMeshs;
-		[SerializeField] private GameObject[] bodyMeshs;
+		[SerializeField] private GameObject[] bodyPartMeshes;
+		[SerializeField] private GameObject[] bodySkinnedMeshs;
 
-		[Header("Strenght fly")]
+		[Header("Strenght force")]
 		[SerializeField] private float _explosionForce = 25f;
 		[SerializeField] private float _explosionRadius = 25f;
 
 		private AIController controller;
 		private float _health;
 		private float _timeDestroy;
+		private float _damage;
+
+		RaycastHit hitInfo;
 
 		private void Start()
 		{
 			controller = GetComponentInParent<AIController>();
-			if (bodyPart == BodyParts.Body) _health = controller.dataZombie.BodyHealth;
-			else if(bodyPart == BodyParts.Head) _health = controller.dataZombie.HeadHealth;
-			else _health = controller.dataZombie.BodyPartHealth;
-			_timeDestroy = controller.dataZombie.TimeLifeAfterDie;
+			if (bodyPart == EnumClass.BodyParts.Body) _health = controller.dataOrks.BodyHealth;
+			else if(bodyPart == EnumClass.BodyParts.Head) _health = controller.dataOrks.HeadHealth;
+			else _health = controller.dataOrks.BodyPartHealth;
+			_timeDestroy = controller.dataOrks.TimeLifeAfterDie;
 		}
-		public void TakeDamageBodyPart(float damage,Vector3 position)
+		//Take damage from weapon method
+		public void TakeDamageBodyPart(float damage,RaycastHit hitInfo,EnumClass.WeaponClass weaponClass)
 		{
-			controller.TakeDamage(damage);
-			if (bodyPart == BodyParts.Body)
-				return;
+			this.hitInfo = hitInfo;
+			_damage = damage;
 
-			_health -= damage;
-		
-			if(_health<=0)
+			switch (bodyPart)
 			{
-				switch (bodyPart)
-				{
-					case BodyParts.Head:
-						BodyPart(position, false);
-						controller.SetRagdoll(false, damage);
-						gameObject.SetActive(false);
-						break;
-					case BodyParts.BodyHandPart:
-						BodyPart(position, false);
-						break;
-					case BodyParts.BodyLegPart:
-						controller.IsCriticalDamage = true;
-						BodyPart(position, false);
-						break;
-				}
+				case EnumClass.BodyParts.Body:
+					controller.TakeDamage(_damage);
+					if (!controller.IsAlive)
+						controller.SetRagdoll(false);
+					break;
+
+				case EnumClass.BodyParts.Head:
+					HeadPart(weaponClass);
+					break;
+
+				case EnumClass.BodyParts.Hand:
+					HandLegPart(false);
+					break;
+
+				case EnumClass.BodyParts.Leg:
+						
+					HandLegPart(true);
+					break;
 			}
+			
+		
 		}
-		public void BodyPart(Vector3 position,bool kinematic)
+		public void TakeDamageExplosion(Vector3 position)
+		{
+
+		}
+		private void HeadPart(EnumClass.WeaponClass weapon)
 		{
 			
-			if(bodyMesh)
+			switch(weapon)
 			{
-				if(bodyMesh.TryGetComponent<SkinnedMeshRenderer>(out SkinnedMeshRenderer meshRenderer))
+				case EnumClass.WeaponClass.Rifle:
+
+					controller.TakeDamage(_damage * 2f);
+					if(!controller.IsAlive)
+					{
+						ExplosionBodyPart(true);
+					}
+				break;
+
+				case EnumClass.WeaponClass.Sniper:
+						ExplosionBodyPart(true);
+					break;
+			}
+		}
+
+		private void HandLegPart(bool isCritical)
+		{
+			if(EnumClass.BodyParts.Leg == bodyPart)
+			controller.IsCriticalDamage = isCritical;
+
+			if (bodySkinnedMesh)
+			{
+				if (bodySkinnedMesh.TryGetComponent<SkinnedMeshRenderer>(out SkinnedMeshRenderer meshRenderer))
 					meshRenderer.enabled = false;
 				else
-					bodyMesh.GetComponent<MeshRenderer>().enabled = false;
+					bodySkinnedMesh.GetComponent<MeshRenderer>().enabled = false;
 			}
 
-			
-			
+			if (bodyPartMesh)
+			{
+				bodyPartMesh.transform.position = hitInfo.point - bodyPartMesh.GetComponent<MeshFilter>().mesh.bounds.center;
+				bodyPartMesh.transform.parent = null;
+				bodyPartMesh.GetComponent<BodyPart>().Active(hitInfo.point);
+			}
+		}
+		private void ExplosionBodyPart(bool kinematic)
+		{
+			if(bodySkinnedMesh)
+			{
+				if(bodySkinnedMesh.TryGetComponent<SkinnedMeshRenderer>(out SkinnedMeshRenderer meshRenderer))
+					meshRenderer.enabled = false;
+				else
+					bodySkinnedMesh.GetComponent<MeshRenderer>().enabled = false;
+			}
+
 			if(bodyPartMesh)
 			{
-				bodyPartMesh.transform.position = position - bodyPartMesh.GetComponent<MeshFilter>().mesh.bounds.center;
+				bodyPartMesh.transform.position = hitInfo.point - bodyPartMesh.GetComponent<MeshFilter>().mesh.bounds.center;
 				bodyPartMesh.transform.parent = null;
-				bodyPartMesh.GetComponent<BodyPart>().Active(position, kinematic);
+				bodyPartMesh.GetComponent<BodyPart>().Active(hitInfo.point);
 			}
 
 
-				AIHitBox[] hitBox = gameObject.GetComponentsInChildren<AIHitBox>();
-				foreach (AIHitBox box in hitBox)
-				{
-					if (box != this)
-					{
-						box.bodyMesh.SetActive(false);
-						if(bodyPartMesh)
-						box.bodyPartMesh.GetComponent<BodyPart>().Active(position, !kinematic);
-					}
-				}
-				gameObject.SetActive(false);
-			
-			
-				foreach(var mesh in bodyMeshs)
-				mesh.SetActive(false);
+			//AIHitBox[] hitBox = gameObject.GetComponentsInChildren<AIHitBox>();
+			//foreach (AIHitBox box in hitBox)
+			//{
+			//	if (box != this)
+			//	{
+			//		box.bodySkinnedMesh.SetActive(false);
+			//		if(bodyPartMesh)
+			//		box.bodyPartMesh.GetComponent<BodyPart>().Active(hitInfo.point, !kinematic);
+			//	}
+			//}
 
-			foreach (var part in bodyPartMeshs)
-				{
-					part.GetComponent<MeshRenderer>().enabled = true;
-					Rigidbody rb = part.GetComponent<Rigidbody>();
-					rb.isKinematic = false;
-					rb.AddExplosionForce(_explosionForce,transform.position,_explosionRadius);
-				}
 
-			
+
+			foreach (var mesh in bodySkinnedMeshs)
+			{
+				mesh.GetComponent<SkinnedMeshRenderer>().enabled = false;
+			}
+
+			foreach (var part in bodyPartMeshes)
+			{
+				BodyPart _part = part.GetComponent<BodyPart>();
+				_part.Active(hitInfo.point);
+				//_part.GetComponent<Rigidbody>().AddExplosionForce(_explosionForce, hitInfo.point, _explosionRadius);
+			}
+			controller.SetRagdoll(false);
+			gameObject.SetActive(false);
 		}
 	}
 }

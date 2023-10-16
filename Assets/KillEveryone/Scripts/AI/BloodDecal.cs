@@ -13,9 +13,9 @@ namespace KillEveryone
 		}
 		public void Active(Vector3 position)
 		{
+			this.gameObject.transform.parent = null;
 			meshRenderer.enabled = true;
 			this.gameObject.transform.position = position;
-			this.gameObject.transform.parent = null;
 		}
 		public void Initialize(Material material, Vector3 scale)
 		{

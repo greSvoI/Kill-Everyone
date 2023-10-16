@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 467878}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: ScopeTarget
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -42,13 +42,13 @@ GameObject:
   - component: {fileID: 443350}
   - component: {fileID: 3388636}
   - component: {fileID: 2394434}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: renderer
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &443350
 Transform:
   m_ObjectHideFlags: 0
@@ -57,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0061, y: 0.0009, z: 0.086}
+  m_LocalPosition: {x: 0.0077, y: 0.0105, z: 0.1058}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 445870}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: muzzle
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 404266}
   - component: {fileID: 21205490}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: laserSight
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 404374}
   - component: {fileID: 12002892}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Laser
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 470826}
   - component: {fileID: 198768485228016028}
   - component: {fileID: 199159641334675314}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Smoke_1
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -5264,7 +5264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 470828}
   - component: {fileID: 7858837408165218877}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Handgun
   m_TagString: Weapon
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -5278,8 +5278,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170828}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.51507854, y: 0.5567621, z: 0.40593377, w: 0.50983125}
+  m_LocalPosition: {x: 0.095, y: -0.059, z: 0.013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5293,7 +5293,7 @@ Transform:
   - {fileID: 445870}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 4.197, y: 98.684, z: 81.941}
 --- !u!114 &7858837408165218877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5306,21 +5306,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7edd451c6588e4bbf82e0bd468604f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  render: {fileID: 0}
+  render: {fileID: 139502}
   fireEffect:
   - {fileID: 198927052463718788}
   - {fileID: 198234110790541942}
   - {fileID: 198134370209081628}
   - {fileID: 198768485228016028}
-  dataWeapon: {fileID: 11400000, guid: 18910e5fd81617e42b1620ae4d049a0f, type: 2}
   rightHandIK: {fileID: 2750086606805013282}
   leftHandIK: {fileID: 451368}
   muzzle: {fileID: 445870}
+  rayCastDestination: {fileID: 0}
+  weaponClass: 0
+  drawWeaponID: 1
+  dataWeapon: {fileID: 11400000, guid: 18910e5fd81617e42b1620ae4d049a0f, type: 2}
+  traceEffect: {fileID: 0}
+  metallEffect: {fileID: 0}
+  stoneEffect: {fileID: 0}
+  woodEffect: {fileID: 0}
+  enemyEffect: {fileID: 0}
+  hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   weaponID: 0
   bulletCount: 0
   bulletClip: 0
   bulletMax: 0
   fireRate: 0
+  damage: 0
 --- !u!1 &170830
 GameObject:
   m_ObjectHideFlags: 0
@@ -5332,7 +5344,7 @@ GameObject:
   - component: {fileID: 470830}
   - component: {fileID: 198927052463718788}
   - component: {fileID: 199626467879948132}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Capsule_pist
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -8214,7 +8226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 470832}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Particles
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -8250,7 +8262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 470834}
   - component: {fileID: 8270846}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: AudioSource
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -8379,7 +8391,7 @@ GameObject:
   - component: {fileID: 470836}
   - component: {fileID: 198134370209081628}
   - component: {fileID: 199414110104910096}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Fire_2
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -13261,7 +13273,7 @@ GameObject:
   - component: {fileID: 470838}
   - component: {fileID: 198234110790541942}
   - component: {fileID: 199866486295975278}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Fire_1
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -18143,7 +18155,7 @@ GameObject:
   - component: {fileID: 470842}
   - component: {fileID: 10870846}
   - component: {fileID: 3775800632580538909}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: Point light
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -18256,7 +18268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 451368}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: leftHandIK
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -18270,14 +18282,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192188}
-  m_LocalRotation: {x: -0.31737563, y: -0.7100283, z: 0.57670224, w: -0.25009426}
-  m_LocalPosition: {x: -0.0859, y: -0.0121, z: 0.054}
+  m_LocalRotation: {x: -0.5737196, y: -0.045668308, z: -0.8118463, w: 0.098314606}
+  m_LocalPosition: {x: -0.064, y: -0.098, z: -0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 470828}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 190.776, y: -110.095, z: 6.2669983}
 --- !u!1 &2250543782901346318
 GameObject:
   m_ObjectHideFlags: 0
@@ -18287,7 +18299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2750086606805013282}
-  m_Layer: 2
+  m_Layer: 3
   m_Name: rightHandIK
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -18301,8 +18313,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2250543782901346318}
-  m_LocalRotation: {x: 0.5628907, y: 0.4163467, z: 0.43051678, w: -0.5696182}
-  m_LocalPosition: {x: 0.0411, y: -0.0201, z: -0.026}
+  m_LocalRotation: {x: 0.10709729, y: 0.000014007086, z: 0.67825395, w: -0.7269813}
+  m_LocalPosition: {x: 0.037, y: 0.012, z: -0.106}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

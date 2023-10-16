@@ -7,7 +7,6 @@ public class Temp : MonoBehaviour
     Rigidbody[] rigidbodies;
 	public float explosionForce;
 	public float explosionRadius;
-	public GameObject gameObject;
 	Animator animator;
 	private void Start()
 	{

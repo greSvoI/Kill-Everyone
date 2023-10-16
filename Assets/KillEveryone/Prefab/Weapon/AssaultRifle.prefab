@@ -27445,7 +27445,7 @@ Transform:
   m_GameObject: {fileID: 130010}
   m_LocalRotation: {x: -0.000000001396984, y: -2.3283067e-10, z: 0.000000003305104,
     w: 1}
-  m_LocalPosition: {x: 0.022999972, y: 0.14810061, z: 0.70069945}
+  m_LocalPosition: {x: 0.023, y: 0.1035, z: 0.617}
   m_LocalScale: {x: 1.0000468, y: 1.000045, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32484,7 +32484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7edd451c6588e4bbf82e0bd468604f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  render: {fileID: 2397092}
+  render: {fileID: 102912}
   fireEffect:
   - {fileID: 198039580061606108}
   - {fileID: 198183902401824878}
@@ -32493,15 +32493,28 @@ MonoBehaviour:
   - {fileID: 198915541407715380}
   - {fileID: 198893295435253854}
   - {fileID: 198571845512792472}
-  dataWeapon: {fileID: 11400000, guid: 56036c20bcc76eb418f847f4c6692a4a, type: 2}
   rightHandIK: {fileID: 3879086986653980695}
   leftHandIK: {fileID: 492864}
   muzzle: {fileID: 4000012731015802}
+  audioSource: {fileID: 0}
+  rayCastDestination: {fileID: 0}
+  weaponClass: 0
+  drawWeaponID: 0
+  dataWeapon: {fileID: 11400000, guid: 56036c20bcc76eb418f847f4c6692a4a, type: 2}
+  traceEffect: {fileID: 0}
+  metallEffect: {fileID: 0}
+  stoneEffect: {fileID: 0}
+  woodEffect: {fileID: 0}
+  enemyEffect: {fileID: 0}
+  hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   weaponID: 0
   bulletCount: 0
   bulletClip: 0
   bulletMax: 0
   fireRate: 0
+  damage: 0
 --- !u!1 &130018
 GameObject:
   m_ObjectHideFlags: 0
