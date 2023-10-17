@@ -28069,12 +28069,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042289656}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!96 &2058215480 stripped
-TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 5643542044368513065, guid: b214fe22e97ff264d9c173023ac2cf3e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1319568636}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2059539548
 GameObject:
   m_ObjectHideFlags: 0
@@ -88799,6 +88793,8 @@ MonoBehaviour:
   CameraAngleOverride: 0
   _followCamera: {fileID: 6607658507744489910}
   _sensivity: 1
+  offsetFollowPlayer: {x: 0, y: 0, z: 0}
+  smoothing: 1
 --- !u!114 &2557224974505654877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98834,9 +98830,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc1a0b991e6b1240a4b00146993fda5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ikController: {fileID: 0}
-  animatorController: {fileID: 0}
-  currentWeapon: {fileID: 0}
+  blood: {fileID: 0}
+  effects: {fileID: 0}
   handHolder: []
   bodyHolder: []
   bullet: {fileID: 0}
@@ -98844,7 +98839,6 @@ MonoBehaviour:
   _isEquip: 0
   rayCastOrigin: {fileID: 0}
   rayCastDestination: {fileID: 1180765793}
-  traceEffect: {fileID: 2058215480}
   metallEffect: {fileID: 7829143122916407237}
   stoneEffect: {fileID: 2245598247596627068}
   woodEffect: {fileID: 7494114348883642565}
@@ -120709,6 +120703,7 @@ MonoBehaviour:
   _rool: 0
   _crouch: 0
   _currentWeapon: 0
+  _equip: 0
   _aim: 0
   _fire: 0
 --- !u!1 &7431009705929430641
@@ -140058,19 +140053,13 @@ MonoBehaviour:
   rightHandIK: {fileID: 2724917850040775619}
   leftHandIK: {fileID: 1154490881522495124}
   muzzle: {fileID: 1156200980580731310}
-  rayCastDestination: {fileID: 0}
+  audioSource: {fileID: 0}
   weaponClass: 0
-  drawWeaponID: 0
+  weaponHolder: 0
   dataWeapon: {fileID: 0}
-  traceEffect: {fileID: 0}
-  metallEffect: {fileID: 0}
-  stoneEffect: {fileID: 0}
-  woodEffect: {fileID: 0}
-  enemyEffect: {fileID: 0}
-  hitLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
+  tracerShootEffect: {fileID: 0}
   weaponID: 0
+  animationID: 0
   bulletCount: 0
   bulletClip: 0
   bulletMax: 0

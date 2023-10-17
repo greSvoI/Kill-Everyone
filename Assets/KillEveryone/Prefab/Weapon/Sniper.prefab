@@ -14703,19 +14703,12 @@ MonoBehaviour:
   leftHandIK: {fileID: 2306882226963818849}
   muzzle: {fileID: 0}
   audioSource: {fileID: 0}
-  rayCastDestination: {fileID: 0}
   weaponClass: 0
-  drawWeaponID: 4
+  weaponHolder: 0
   dataWeapon: {fileID: 0}
-  traceEffect: {fileID: 0}
-  metallEffect: {fileID: 0}
-  stoneEffect: {fileID: 0}
-  woodEffect: {fileID: 0}
-  enemyEffect: {fileID: 0}
-  hitLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
+  tracerShootEffect: {fileID: 0}
   weaponID: 0
+  animationID: 0
   bulletCount: 0
   bulletClip: 0
   bulletMax: 0

@@ -28,8 +28,6 @@ namespace KillEveryone
 		{
 	
 			Vector2 direction = new Vector2(input.Move.x, input.Move.y).normalized;
-			Debug.Log(input.Move);
-			Debug.Log(direction);
 			moveController.Move(direction,_speed);
 			
 			if (!input.Crouch)

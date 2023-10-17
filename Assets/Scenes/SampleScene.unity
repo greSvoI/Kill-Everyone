@@ -563,19 +563,13 @@ MonoBehaviour:
   rightHandIK: {fileID: 0}
   leftHandIK: {fileID: 0}
   muzzle: {fileID: 1890029336}
-  rayCastDestination: {fileID: 0}
+  audioSource: {fileID: 0}
   weaponClass: 0
-  drawWeaponID: 0
+  weaponHolder: 0
   dataWeapon: {fileID: 0}
-  traceEffect: {fileID: 0}
-  metallEffect: {fileID: 0}
-  stoneEffect: {fileID: 0}
-  woodEffect: {fileID: 0}
-  enemyEffect: {fileID: 0}
-  hitLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
+  tracerShootEffect: {fileID: 0}
   weaponID: 0
+  animationID: 0
   bulletCount: 0
   bulletClip: 0
   bulletMax: 0
@@ -2279,19 +2273,13 @@ MonoBehaviour:
   rightHandIK: {fileID: 0}
   leftHandIK: {fileID: 0}
   muzzle: {fileID: 1832931813}
-  rayCastDestination: {fileID: 0}
+  audioSource: {fileID: 0}
   weaponClass: 0
-  drawWeaponID: 0
+  weaponHolder: 0
   dataWeapon: {fileID: 0}
-  traceEffect: {fileID: 0}
-  metallEffect: {fileID: 0}
-  stoneEffect: {fileID: 0}
-  woodEffect: {fileID: 0}
-  enemyEffect: {fileID: 0}
-  hitLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
+  tracerShootEffect: {fileID: 0}
   weaponID: 0
+  animationID: 0
   bulletCount: 0
   bulletClip: 0
   bulletMax: 0

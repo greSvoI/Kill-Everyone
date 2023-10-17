@@ -6,6 +6,18 @@ TagManager:
   tags:
   - Weapon
   - Sphere
+  - Action
+  - Metal
+  - Glass
+  - Ignore Ragdoll
+  - PlayerUI
+  - Dirt
+  - Enemy
+  - Barrel
+  - Wood
+  - Concrete
+  - LookAt
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
@@ -19,7 +31,7 @@ TagManager:
   - Enemy
   - BodyPart
   - Wall
-  - LandScape
+  - WeaponUI
   - 
   - 
   - 

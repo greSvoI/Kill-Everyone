@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 2758154732714578174}
   - component: {fileID: 2758154732714578113}
   - component: {fileID: 325594609810216625}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AvatarHead_cell.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,8 +378,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &325594609810216625
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -471,7 +469,7 @@ GameObject:
   - component: {fileID: 1749351130645288956}
   - component: {fileID: 1749351130645288959}
   - component: {fileID: 4216671187273290163}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AvatarHead_cell.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,8 +570,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &4216671187273290163
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -602,7 +598,7 @@ GameObject:
   - component: {fileID: 4015601464047332937}
   - component: {fileID: 4015601464047332936}
   - component: {fileID: 1547014847467792392}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AvatarHead_cell.023
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,8 +699,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &1547014847467792392
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1327,8 +1321,13 @@ MonoBehaviour:
   bodyPart: 1
   bodyPartMesh: {fileID: 0}
   bodySkinnedMesh: {fileID: 0}
-  bodyPartMeshs: []
-  bodySkinnedMeshs: []
+  bodyPartMeshes: []
+  bodySkinnedMeshs:
+  - {fileID: 8343418881261831029}
+  - {fileID: 7654294136966441868}
+  - {fileID: 8100875421666846720}
+  - {fileID: 5682765750824093661}
+  - {fileID: 7127545320520828581}
   _explosionForce: 25
   _explosionRadius: 25
 --- !u!1 &1727239593042099549
@@ -1409,7 +1408,7 @@ GameObject:
   - component: {fileID: 4104207648633817891}
   - component: {fileID: 4104207648633817890}
   - component: {fileID: 4104207648633817892}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: outfit_cell.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1510,8 +1509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &4104207648633817892
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1540,7 +1537,7 @@ GameObject:
   - component: {fileID: 1925157293980143126}
   - component: {fileID: 1925157293980143125}
   - component: {fileID: 1925157293980143129}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Left_Hand_part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1641,8 +1638,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &1925157293980143129
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1703,7 +1698,7 @@ GameObject:
   - component: {fileID: 3531947323879131373}
   - component: {fileID: 3531947323879131372}
   - component: {fileID: 3531947323879131374}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: outfit_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1804,8 +1799,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &3531947323879131374
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2091,7 +2084,7 @@ GameObject:
   - component: {fileID: 2532761123322676485}
   - component: {fileID: 2532761123322676484}
   - component: {fileID: 136371730151605068}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AvatarHead_cell.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2192,8 +2185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &136371730151605068
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2347,7 +2338,7 @@ GameObject:
   - component: {fileID: 2784858536688456608}
   - component: {fileID: 2784858536688456611}
   - component: {fileID: 317397785487955439}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AvatarHead_cell.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2448,8 +2439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &317397785487955439
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2638,7 +2627,7 @@ GameObject:
   - component: {fileID: 3358807834553838316}
   - component: {fileID: 3358807834553838319}
   - component: {fileID: 891343707509861539}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AvatarHead_cell.020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2739,8 +2728,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &891343707509861539
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3106,7 +3093,7 @@ MonoBehaviour:
   bodyPart: 2
   bodyPartMesh: {fileID: 0}
   bodySkinnedMesh: {fileID: 0}
-  bodyPartMeshs: []
+  bodyPartMeshes: []
   bodySkinnedMeshs: []
   _explosionForce: 25
   _explosionRadius: 25
@@ -3220,7 +3207,7 @@ GameObject:
   - component: {fileID: 1524477752217960939}
   - component: {fileID: 1524477752217960938}
   - component: {fileID: 1524477752217960940}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: outfit_cell.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3321,8 +3308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &1524477752217960940
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3351,7 +3336,7 @@ GameObject:
   - component: {fileID: 4069482178667281521}
   - component: {fileID: 4069482178667281520}
   - component: {fileID: 1926386109730273824}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AvatarHead_cell.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3452,8 +3437,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &1926386109730273824
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3595,7 +3578,7 @@ MonoBehaviour:
   bodyPart: 3
   bodyPartMesh: {fileID: 0}
   bodySkinnedMesh: {fileID: 0}
-  bodyPartMeshs: []
+  bodyPartMeshes: []
   bodySkinnedMeshs: []
   _explosionForce: 25
   _explosionRadius: 25
@@ -3739,7 +3722,7 @@ GameObject:
   - component: {fileID: 4605158962892378256}
   - component: {fileID: 4605158962892378259}
   - component: {fileID: 2101666046345664223}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AvatarHead_cell.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3840,8 +3823,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &2101666046345664223
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4110,7 +4091,7 @@ MonoBehaviour:
   bodyPart: 2
   bodyPartMesh: {fileID: 0}
   bodySkinnedMesh: {fileID: 0}
-  bodyPartMeshs: []
+  bodyPartMeshes: []
   bodySkinnedMeshs: []
   _explosionForce: 25
   _explosionRadius: 25
@@ -4531,7 +4512,7 @@ MonoBehaviour:
   bodyPart: 2
   bodyPartMesh: {fileID: 0}
   bodySkinnedMesh: {fileID: 0}
-  bodyPartMeshs: []
+  bodyPartMeshes: []
   bodySkinnedMeshs: []
   _explosionForce: 25
   _explosionRadius: 25
@@ -4940,10 +4921,29 @@ MonoBehaviour:
   bodyPart: 0
   bodyPartMesh: {fileID: 0}
   bodySkinnedMesh: {fileID: 0}
-  bodyPartMeshs: []
-  bodySkinnedMeshs: []
-  _explosionForce: 25
-  _explosionRadius: 25
+  bodyPartMeshes:
+  - {fileID: 2784858536688456610}
+  - {fileID: 2532761123322676487}
+  - {fileID: 208764644371183920}
+  - {fileID: 439773029026894037}
+  - {fileID: 4605158962892378258}
+  - {fileID: 8624805239734810413}
+  - {fileID: 6606296343959639424}
+  - {fileID: 4069482178667281523}
+  - {fileID: 3358807834553838318}
+  - {fileID: 7990104674711083707}
+  - {fileID: 467670821974678729}
+  bodySkinnedMeshs:
+  - {fileID: 3444505438646582776}
+  - {fileID: 2342414855321471796}
+  - {fileID: 8466532665195373420}
+  - {fileID: 8402440177973630588}
+  - {fileID: 6780900094087579410}
+  - {fileID: 6430101053480373266}
+  - {fileID: 746251581587599873}
+  - {fileID: 196581330185817906}
+  _explosionForce: 2000
+  _explosionRadius: 2000
 --- !u!1 &5755402609720855089
 GameObject:
   m_ObjectHideFlags: 0
@@ -5085,7 +5085,7 @@ GameObject:
   - component: {fileID: 6022606086766592196}
   - component: {fileID: 6022606086766592195}
   - component: {fileID: 6022606086766592199}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Right_Hand_part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5186,8 +5186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &6022606086766592199
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5283,15 +5281,7 @@ MonoBehaviour:
   bodyPart: 1
   bodyPartMesh: {fileID: 0}
   bodySkinnedMesh: {fileID: 0}
-  bodyPartMeshs:
-  - {fileID: 7891145801824865086}
-  - {fileID: 7891145802175949002}
-  - {fileID: 9059501380626398823}
-  - {fileID: 4029131770224363431}
-  - {fileID: 1889051770530057583}
-  - {fileID: 2059838090592440071}
-  - {fileID: 1925157293980143124}
-  - {fileID: 6022606086766592194}
+  bodyPartMeshes: []
   bodySkinnedMeshs:
   - {fileID: 8343418881261831029}
   - {fileID: 7654294136966441868}
@@ -5521,8 +5511,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyPart: 3
   bodyPartMesh: {fileID: 0}
-  bodySkinnedMesh: {fileID: 0}
-  bodyPartMeshs: []
+  bodySkinnedMesh: {fileID: 5682765750824093661}
+  bodyPartMeshes: []
   bodySkinnedMeshs: []
   _explosionForce: 25
   _explosionRadius: 25
@@ -5826,7 +5816,7 @@ GameObject:
   - component: {fileID: 2284576140575429115}
   - component: {fileID: 2284576140575429114}
   - component: {fileID: 4428762925029791670}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AvatarHead_cell.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5927,8 +5917,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &4428762925029791670
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6219,7 +6207,7 @@ SkinnedMeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 751e6e5327e4f3a43935f32c1e7045e5, type: 2}
   - {fileID: 2100000, guid: 3d8c24c8be5490440a31e311af1ee854, type: 2}
-  - {fileID: 2564792478822542703, guid: 1b450a8a63fe4004d832bd6dd4203247, type: 3}
+  - {fileID: 2100000, guid: 82299a4d359a0b3459106f92e9de94e6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6515,7 +6503,7 @@ MonoBehaviour:
   bodyPart: 3
   bodyPartMesh: {fileID: 0}
   bodySkinnedMesh: {fileID: 0}
-  bodyPartMeshs: []
+  bodyPartMeshes: []
   bodySkinnedMeshs: []
   _explosionForce: 25
   _explosionRadius: 25
@@ -6823,7 +6811,7 @@ GameObject:
   - component: {fileID: 7891145801824865057}
   - component: {fileID: 7891145801824865056}
   - component: {fileID: 7891145801824865060}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Left_Leg_part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6925,8 +6913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &7891145801824865060
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6955,7 +6941,7 @@ GameObject:
   - component: {fileID: 7891145802175949005}
   - component: {fileID: 7891145802175949004}
   - component: {fileID: 7891145802175949040}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Right_Leg_part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7057,8 +7043,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &7891145802175949040
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7087,7 +7071,7 @@ GameObject:
   - component: {fileID: 116995420715821952}
   - component: {fileID: 116995420715821955}
   - component: {fileID: 2548464785018318287}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AvatarHead_cell.022
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7188,8 +7172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &2548464785018318287
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8173,7 +8155,7 @@ GameObject:
   - component: {fileID: 4375125920363524588}
   - component: {fileID: 4375125920363524591}
   - component: {fileID: 2194871874370533283}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AvatarHead_cell.016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8274,8 +8256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &2194871874370533283
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8480,8 +8460,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyPart: 3
   bodyPartMesh: {fileID: 0}
-  bodySkinnedMesh: {fileID: 0}
-  bodyPartMeshs: []
+  bodySkinnedMesh: {fileID: 7127545320520828581}
+  bodyPartMeshes: []
   bodySkinnedMeshs: []
   _explosionForce: 25
   _explosionRadius: 25
@@ -8564,7 +8544,7 @@ GameObject:
   - component: {fileID: 6272522506698305204}
   - component: {fileID: 6272522506698305203}
   - component: {fileID: 6272522506698305205}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: outfit_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8665,8 +8645,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3948a7275dc2f224881fa6adb8b3fc23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decal: {fileID: 0}
-  dataOrks: {fileID: 0}
 --- !u!64 &6272522506698305205
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8839,7 +8817,7 @@ MonoBehaviour:
   bodyPart: 2
   bodyPartMesh: {fileID: 0}
   bodySkinnedMesh: {fileID: 0}
-  bodyPartMeshs: []
+  bodyPartMeshes: []
   bodySkinnedMeshs: []
   _explosionForce: 25
   _explosionRadius: 25

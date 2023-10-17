@@ -153,6 +153,7 @@ namespace KillEveryone
 		{
 			animator.SetLookAtPosition(lookAtPosition.position);
 			animator.SetLookAtWeight(_lookWeight,_bodyWeight,_headWeight,_eyesWeight,_clampWeight);
+			
 			//LeftHand
 			if (leftHand != null)
 			{
@@ -176,6 +177,7 @@ namespace KillEveryone
 
 				rightHand.rotation = Quaternion.Lerp(Quaternion.Euler(rot), quat, 1f);
 
+				//rightHand.rotation = quat;
 
 				animator.SetIKPositionWeight(AvatarIKGoal.RightHand, _rightHandWeight);
 				animator.SetIKPosition(AvatarIKGoal.RightHand, rightHand.position);

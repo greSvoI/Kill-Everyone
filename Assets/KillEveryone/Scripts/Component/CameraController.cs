@@ -11,6 +11,7 @@ namespace KillEveryone
 	{
 
 		private PlayerInput input;
+		private Camera mainCamera;
 
 		[Tooltip("How far in degrees can you move the camera up")]
 		public float TopClamp = 70.0f;
@@ -20,19 +21,22 @@ namespace KillEveryone
 		public float CameraAngleOverride = 0.0f;
 
 		[SerializeField] private Transform _followCamera;
-
 		[SerializeField] private float _sensivity = 5f;
+
+
+		[SerializeField] private Vector3 offsetFollowPlayer;
 
 		private float _cameraInputX;
 		private float _cameraInputY;
 		private void Start()
 		{
 			input = GetComponent<PlayerInput>();
+			
 		}
 
 		private void Update()
 		{
-
+			
 		}
 
 		public float smoothing = 1.0f; // Параметр сглаживания

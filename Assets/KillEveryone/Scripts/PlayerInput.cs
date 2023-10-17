@@ -26,7 +26,10 @@ namespace KillEveryone
 		public bool Sprint => _sprint;
 		public bool Roll => _rool;
 		public bool Crouch => _crouch;
-		public bool Aim { get=>_aim; set=>_aim = value; }
+		public bool Aim { get=>_aim; set { 
+				_aim = value;
+				EventManager.Aim?.Invoke(_aim);
+			} }
 		public bool Fire => _fire;
 		public float Magnituda => _magnituda;
 		public float CurrentWeapon => _currentWeapon;
@@ -71,8 +74,8 @@ namespace KillEveryone
 		{
 			if(_equip)
 			{
-				_aim = !_aim;
-				EventManager.Aim?.Invoke(_aim);
+				Aim = !_aim;
+				
 			}
 		}
 

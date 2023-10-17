@@ -89,7 +89,7 @@ namespace KillEveryone
 		{
 			if(_isEquip)
 			{
-				audioController.PlayReload();
+				//audioController.PlayReload();
 			}
 		}
 
