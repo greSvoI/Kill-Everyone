@@ -23058,7 +23058,6 @@ MonoBehaviour:
   bulletMax: 0
   fireRate: 0
   damage: 0
-  targetPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &7517316869498621577
 GameObject:
   m_ObjectHideFlags: 0

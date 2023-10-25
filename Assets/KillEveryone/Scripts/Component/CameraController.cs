@@ -31,7 +31,8 @@ namespace KillEveryone
 		private void Start()
 		{
 			input = GetComponent<PlayerInput>();
-			
+			Cursor.lockState = CursorLockMode.Locked;
+
 		}
 
 		private void Update()
@@ -42,7 +43,6 @@ namespace KillEveryone
 		public float smoothing = 1.0f; // Параметр сглаживания
 		private void LateUpdate()
 		{
-			
 			CameraRotation();
 		}
 		private void CameraRotation()

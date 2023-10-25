@@ -3,7 +3,27 @@ guid: df37a2fbfe5b77c4183c780351fdb081
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bot
+    second: {fileID: 2100000, guid: 5239687fda080184ebbe8a3b1349836f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Top
+    second: {fileID: 2100000, guid: b8d78c3925c6d144faad390a489daa46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: orange.002
+    second: {fileID: 2100000, guid: e70808370420c194eab6f891bd0c1cab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: weaponMaterial2.002
+    second: {fileID: 2100000, guid: e70808370420c194eab6f891bd0c1cab, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

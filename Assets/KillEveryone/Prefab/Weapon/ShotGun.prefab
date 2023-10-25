@@ -2899,7 +2899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3422014715583978141
 Transform:
   m_ObjectHideFlags: 0
@@ -27551,19 +27551,13 @@ MonoBehaviour:
   rightHandIK: {fileID: 2699325563969895857}
   leftHandIK: {fileID: 5481699801014600564}
   muzzle: {fileID: 2106604044772317768}
-  rayCastDestination: {fileID: 0}
+  audioSource: {fileID: 0}
   weaponClass: 1
-  drawWeaponID: 4
+  weaponHolder: 0
   dataWeapon: {fileID: 11400000, guid: eb25f2c804888ab4b9388a7b8ec26a59, type: 2}
-  traceEffect: {fileID: 0}
-  metallEffect: {fileID: 0}
-  stoneEffect: {fileID: 0}
-  woodEffect: {fileID: 0}
-  enemyEffect: {fileID: 0}
-  hitLayerMask:
-    serializedVersion: 2
-    m_Bits: 3009
+  tracerShootEffect: {fileID: 0}
   weaponID: 0
+  animationID: 0
   bulletCount: 0
   bulletClip: 0
   bulletMax: 0

@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d7d78b98bbfacf4f81d474a2ca3f785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponID: 0
   render: {fileID: 3358556563591634637}
-  WeaponID: 3
+  weapon: {fileID: 0}
+  holderBody: 0
 --- !u!1 &3358556563591634637
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,10 +102,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1556137943212137788, guid: df37a2fbfe5b77c4183c780351fdb081, type: 3}
-  - {fileID: -5317726970980277222, guid: df37a2fbfe5b77c4183c780351fdb081, type: 3}
-  - {fileID: 6721115225796478223, guid: df37a2fbfe5b77c4183c780351fdb081, type: 3}
-  - {fileID: -1293887620268828351, guid: df37a2fbfe5b77c4183c780351fdb081, type: 3}
+  - {fileID: 2100000, guid: 738736f6ade870648957ea31fd538a5e, type: 2}
+  - {fileID: 2100000, guid: 738736f6ade870648957ea31fd538a5e, type: 2}
+  - {fileID: 2100000, guid: b8d78c3925c6d144faad390a489daa46, type: 2}
+  - {fileID: 2100000, guid: 5239687fda080184ebbe8a3b1349836f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
