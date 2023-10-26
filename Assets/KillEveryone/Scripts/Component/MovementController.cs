@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Rendering;
@@ -37,11 +38,15 @@ namespace KillEveryone
 		private void Update()
 		{
 			ApllyGravity();
-			if(input.Move != Vector2.zero)
-			{
-				Move(input.Move, 5f);
-			}
+			//if(input.Move != Vector2.zero)
+			//{
+			//	Move(input.Move, 5f);
+			//}
 			controller.Move(velocity * Time.deltaTime);
+		}
+		private void FixedUpdate()
+		{
+			
 		}
 		public void ApllyGravity()
 		{
@@ -55,13 +60,13 @@ namespace KillEveryone
 			}
 			
 		}
-		public Vector3 moveDirection;
 		public void Move(Vector2 moveInput, float targetSpeed, bool rotateCharacter = true)
 		{
 			float targetRotation = 0f;
 			_speed = Mathf.Lerp(_speed, targetSpeed * input.Move.magnitude, Time.deltaTime * SpeedChangeRate);
 
 			//if (_speed < 0.3f) _speed = 0f;
+			
 
 			if (moveInput != Vector2.zero)
 			{
@@ -79,13 +84,30 @@ namespace KillEveryone
 				}
 			}
 
-			Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
-			velocity = targetDirection.normalized * _speed + new Vector3(0.0f, velocity.y, 0.0f);
+			Vector3 targetDirection = mainCamera.forward * moveInput.y + mainCamera.right * moveInput.x;
+			targetDirection.Normalize();
+			targetDirection.y = velocity.y;
+			targetDirection *= targetSpeed;
+			velocity = targetDirection;
 
+			//Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation,0.0f) * Vector3.forward;
+			//velocity = targetDirection.normalized * _speed + new Vector3(0.0f, velocity.y, 0.0f);
+
+		}
+		public void Move(Vector3 velocity)
+		{
+			Vector3 _velocity = velocity;
+			_velocity.y = this.velocity.y;
+			this.velocity = _velocity;
 		}
 		private void OnAnimatorMove()
 		{
 			
+		}
+
+		internal void StopMovement()
+		{
+			velocity = Vector3.zero;
 		}
 	}
 }

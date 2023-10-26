@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,27 +21,45 @@ namespace KillEveryone
 		[Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
 		public float CameraAngleOverride = 0.0f;
 
+		[SerializeField] private Cinemachine3rdPersonFollow cinemachine3rd;
+		[SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
+
 		[SerializeField] private Transform _followCamera;
 		[SerializeField] private float _sensivity = 5f;
-
 
 		[SerializeField] private Vector3 offsetFollowPlayer;
 
 		private float _cameraInputX;
 		private float _cameraInputY;
+
+		
 		private void Start()
 		{
 			input = GetComponent<PlayerInput>();
 			Cursor.lockState = CursorLockMode.Locked;
+	
 
+			EventManager.Aim += OnAim;
+			EventManager.Weapon += OnWeapon;
+		}
+
+		private void OnWeapon(int obj)
+		{
+			
+		}
+
+		private void OnAim(bool obj)
+		{
+			
 		}
 
 		private void Update()
 		{
 			
+
 		}
 
-		public float smoothing = 1.0f; // Параметр сглаживания
+		public float smoothing = 1.0f;
 		private void LateUpdate()
 		{
 			CameraRotation();
@@ -49,15 +68,16 @@ namespace KillEveryone
 		{
 			_cameraInputY += input.Look.y * _sensivity;
 			_cameraInputX += input.Look.x * _sensivity;
-
-			
-
-
 			_cameraInputX = ClampAngle(_cameraInputX, float.MinValue, float.MaxValue);
 			_cameraInputY = ClampAngle(_cameraInputY, BottomClamp, TopClamp);
 
 			_followCamera.transform.rotation = Quaternion.Euler(_cameraInputY, _cameraInputX, 0f);
 			//_followCamera.transform.rotation = Quaternion.Slerp(_followCamera.transform.rotation, Quaternion.Euler(_cameraInputY, _cameraInputX, 0f),smoothing);
+		}
+		private void OnDisable()
+		{
+			EventManager.Aim -= OnAim;
+			EventManager.Weapon -= OnWeapon;
 		}
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
 		{

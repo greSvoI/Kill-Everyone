@@ -18,6 +18,7 @@ namespace KillEveryone
 		[SerializeField] private bool _crouch = false;
 		[SerializeField] private int _currentWeapon;
 		[SerializeField] private bool _equip = false;
+		[SerializeField] private bool _reload = false;
 
 		[SerializeField] private bool _aim = false;
 		[SerializeField] private bool _fire = false;
@@ -30,6 +31,7 @@ namespace KillEveryone
 				_aim = value;
 				EventManager.Aim?.Invoke(_aim);
 			} }
+		public bool Reload => _reload;
 		public bool Fire => _fire;
 		public float Magnituda => _magnituda;
 		public float CurrentWeapon => _currentWeapon;
@@ -44,13 +46,14 @@ namespace KillEveryone
 
 			input.Player.Sprint.performed += i => _sprint = i.ReadValueAsButton();
 
+
 			input.Player.Look.performed += i => _look = i.ReadValue<Vector2>();
 			input.Player.Look.canceled += i => _look = i.ReadValue<Vector2>();
 
-			//input.Player.Roll.performed += i => _rool = i.ReadValueAsButton();
-			//input.Player.Roll.canceled += i => _rool = i.ReadValueAsButton();
+			input.Player.Roll.performed += i => _rool = i.ReadValueAsButton();
+			input.Player.Roll.canceled += i => _rool = i.ReadValueAsButton();
 
-			input.Player.Roll.canceled += i => { SceneManager.LoadScene(0);  };
+			
 
 			input.Player.Crouch.performed += i => { _crouch = !_crouch; };
 
@@ -60,7 +63,9 @@ namespace KillEveryone
 			//input.Player.Aim.performed += i => { 
 			//	_aim = !_aim; EventManager.Aim?.Invoke(_aim);
 			//};
+			input.Player.Aim.started += OnAim;
 			input.Player.Aim.performed += OnAim;
+			input.Player.Aim.canceled += OnAim;
 
 			input.Player.Fire.performed += i => { 
 				_fire = i.ReadValueAsButton(); 

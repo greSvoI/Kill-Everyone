@@ -392,7 +392,7 @@ namespace StarterAssets
 		//public Transform IK;
 		//public Transform IKHint;
 		//public float weight = 0f;
-		//private void OnAnimatorIK(int layerIndex)
+		//private void OnAnimatorIK(int _layerIndex)
 		//{
 		//	_animator.SetIKPosition(AvatarIKGoal.LeftHand, IK.position);
 		//	_animator.SetIKHintPosition(AvatarIKHint.LeftElbow, IKHint.position);

@@ -7,7 +7,7 @@ public class ResetBool : StateMachineBehaviour
     public string parametersName;
     public bool parametrsState;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int _layerIndex)
     //{
     //    
     //}
@@ -26,13 +26,13 @@ public class ResetBool : StateMachineBehaviour
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int _layerIndex)
     //{
     //    // Implement code that processes and affects root motion
     //}
 
     // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int _layerIndex)
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
