@@ -1,7 +1,8 @@
 # Kill-Everyone
-
 https://github.com/iovSerg/Kill-Everyone/assets/62199466/975e5089-9f09-4a53-bb64-130d4ae36a4e
+# 1 is 2
 https://github.com/iovSerg/Kill-Everyone/assets/62199466/e0fbc6ed-c2ce-458d-b5d1-5340a9896bdd
+# 2 is 2
 https://github.com/iovSerg/Kill-Everyone/assets/62199466/52692fd7-edec-4ba5-b91b-129c5330e30d
 
 # Google Drive
